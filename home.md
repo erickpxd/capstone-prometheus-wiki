@@ -1,67 +1,100 @@
 # Prometheus V2
 
-## Bem-vindo
+> Documentação oficial do projeto **Prometheus V2**, desenvolvido como parte do Capstone da disciplina de Arquitetura de Software.
 
-Esta Wiki reúne toda a documentação do projeto **Prometheus V2**, desenvolvido como parte da disciplina de Arquitetura de Software.
+## Sobre o Projeto
 
-O objetivo do projeto é propor uma evolução arquitetural para o sistema Prometheus V1, preservando suas funcionalidades essenciais enquanto melhora atributos de qualidade como escalabilidade, modularidade, manutenibilidade, desempenho e facilidade de evolução.
+O **Prometheus V2** é uma proposta de modernização arquitetural do sistema Prometheus V1, um ambiente virtual de aprendizagem utilizado pela School X. Após anos de evolução, a arquitetura da primeira versão passou a apresentar dificuldades relacionadas à manutenção, escalabilidade e evolução tecnológica.
 
-Toda a documentação técnica, decisões arquiteturais, diagramas, requisitos e entregáveis estão organizados nesta Wiki.
+O objetivo do projeto é propor uma nova arquitetura que preserve as funcionalidades existentes, reduza os problemas identificados e facilite futuras expansões do sistema.
 
----
-
-# Estrutura da Documentação
-
-## Projeto
-
-Apresenta a visão geral, objetivos, escopo e tecnologias utilizadas.
-
-## Requisitos
-
-Documenta as necessidades funcionais e não funcionais do sistema, além da análise das limitações identificadas na versão anterior.
-
-## Arquitetura
-
-Descreve a arquitetura proposta, decisões tomadas, diagramas C4, atributos de qualidade e análises de trade-offs.
-
-## Design
-
-Contém protótipos, wireframes e fluxos de navegação.
-
-## Implementação
-
-Apresenta a estrutura do repositório, organização das APIs e tecnologias utilizadas.
-
-## Gerenciamento
-
-Contém cronograma, riscos identificados e planejamento do projeto.
-
-## Entregáveis
-
-Reúne todos os artefatos produzidos durante o Capstone.
-
-## Referências
-
-Lista todas as referências bibliográficas utilizadas.
+Esta Wiki centraliza toda a documentação técnica do projeto, incluindo requisitos, decisões arquiteturais, diagramas, análises e demais artefatos produzidos durante o desenvolvimento do Capstone.
 
 ---
 
-# Organização
+# Estrutura da Wiki
 
-- Código-fonte: Repositório GitLab
-- Documentação: Wiki GitLab
-- Diagramas: Mermaid e PlantUML
-- Controle de versão: Git
+## 📋 Projeto
+
+Informações gerais sobre o Prometheus V2, seus objetivos, escopo e contexto.
+
+- Visão Geral
 
 ---
 
-# Navegação
+## 📑 Requisitos
+
+Documentação dos requisitos levantados para o novo sistema.
+
+- Análise de Lacunas
+- Requisitos Funcionais
+- Requisitos Não Funcionais
+
+---
+
+## 🏛 Arquitetura
+
+Documentação da arquitetura proposta.
+
+- Visão Geral
+- Estilo Arquitetural
+- Estratégias Avaliadas
+- Diagramas C4
+- Atributos de Qualidade
+- Trade-offs
+- Decisões Arquiteturais
+
+---
+
+## 📅 Gerenciamento
+
+Planejamento do projeto.
+
+- Cronograma
+- Gestão de Riscos
+
+---
+
+## 📦 Entregáveis
+
+Documentos produzidos durante o Capstone.
+
+- Proposta Inicial
+- Documento de Arquitetura
+- Trade-offs
+- Apresentações
+
+---
+
+# Organização do Projeto
+
+| Item | Local |
+|------|-------|
+| Código-fonte | Repositório GitLab |
+| Documentação | Wiki GitLab |
+| Diagramas | Mermaid / PlantUML |
+| Controle de versão | Git |
+
+---
+
+# Tecnologias Utilizadas
+
+- C#
+- ASP.NET Core
+- SQL Server
+- Entity Framework Core
+- REST APIs
+- Git
+- GitLab
+- Mermaid
+- PlantUML
+
+---
+
+# Navegação Rápida
 
 - Projeto
 - Requisitos
 - Arquitetura
-- Design
-- Implementação
 - Gerenciamento
 - Entregáveis
-- Referências

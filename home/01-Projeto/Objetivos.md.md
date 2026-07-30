@@ -1,8 +1,6 @@
 ---
-title: Objetivos.md
+title: Objetivos
 ---
-# Objetivos
-
 ## Objetivo Geral
 
 Projetar uma nova arquitetura para o Prometheus V2 utilizando boas práticas de Arquitetura de Software.

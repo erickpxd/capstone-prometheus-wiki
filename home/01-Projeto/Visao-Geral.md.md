@@ -5,23 +5,23 @@ title: Visao-Geral
 
 ## Introdução
 
-O Prometheus V2 é uma proposta de modernização arquitetural do sistema Prometheus V1.
+O Prometheus V2 é uma proposta de evolução arquitetural do sistema Prometheus V1, desenvolvido para atender às necessidades acadêmicas da School X.
 
-O Prometheus V1 atende às necessidades acadêmicas da instituição, porém sua arquitetura apresenta limitações relacionadas à escalabilidade, modularidade e facilidade de manutenção, dificultando a evolução do software ao longo do tempo.
+Ao longo dos anos, o sistema passou por diversas modificações que aumentaram seu acoplamento e dificultaram sua evolução. Como consequência, atividades de manutenção, inclusão de novas funcionalidades e escalabilidade passaram a demandar maior esforço da equipe de desenvolvimento.
 
-O objetivo do Prometheus V2 é preservar o funcionamento do sistema existente enquanto introduz uma arquitetura moderna, modular e preparada para futuras expansões.
+O projeto Prometheus V2 busca solucionar essas limitações por meio da definição de uma arquitetura mais modular, organizada e preparada para crescimento futuro.
 
 ---
 
-## Objetivos
+## Objetivo
 
-- Melhorar a organização da arquitetura.
-- Facilitar manutenção.
-- Permitir evolução incremental.
-- Reduzir acoplamento entre módulos.
-- Melhorar escalabilidade.
-- Facilitar testes.
-- Aumentar reutilização de componentes.
+Modernizar a arquitetura do Prometheus V1 preservando suas funcionalidades essenciais e melhorando atributos de qualidade como:
+
+- Modularidade
+- Escalabilidade
+- Manutenibilidade
+- Disponibilidade
+- Facilidade de evolução
 
 ---
 
@@ -29,11 +29,12 @@ O objetivo do Prometheus V2 é preservar o funcionamento do sistema existente en
 
 O projeto contempla o reprojeto arquitetural do sistema, incluindo:
 
-- Arquitetura
-- Diagramas
-- Requisitos
-- Decisões arquiteturais
-- Estratégias de implementação
+- levantamento de requisitos;
+- definição da arquitetura;
+- modelagem utilizando diagramas C4;
+- documentação das decisões arquiteturais;
+- análise de trade-offs;
+- planejamento da implementação.
 
 A implementação completa do sistema não faz parte do escopo do Capstone.
 
@@ -41,7 +42,9 @@ A implementação completa do sistema não faz parte do escopo do Capstone.
 
 ## Público-alvo
 
+O sistema é destinado aos seguintes usuários:
+
+- Administradores
 - Professores
 - Alunos
-- Equipe de desenvolvimento
-- Avaliadores do Capstone
+- Equipe técnica responsável pela manutenção da plataforma

@@ -1,3 +1,0 @@
----
-title: Diagramas-C4
----

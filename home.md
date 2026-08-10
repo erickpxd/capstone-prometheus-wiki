@@ -1,100 +1,30 @@
 # Prometheus V2
 
-> Documentação oficial do projeto **Prometheus V2**, desenvolvido como parte do Capstone da disciplina de Arquitetura de Software.
+> Wiki acadêmica do Projeto Capstone de Arquitetura de Software II.
 
-## Sobre o Projeto
+O Prometheus V2 é a proposta de modernização do LMS utilizado pela School X há aproximadamente quinze anos. O projeto preserva as funções e os dados históricos do Prometheus V1, corrige seus principais gargalos e organiza a evolução do sistema como um **monólito modular**, sem caracterizá-lo como uma arquitetura de microsserviços pura.
 
-O **Prometheus V2** é uma proposta de modernização arquitetural do sistema Prometheus V1, um ambiente virtual de aprendizagem utilizado pela School X. Após anos de evolução, a arquitetura da primeira versão passou a apresentar dificuldades relacionadas à manutenção, escalabilidade e evolução tecnológica.
+Esta Home funciona apenas como índice. O conteúdo acadêmico está organizado conforme os entregáveis definidos para o Capstone.
 
-O objetivo do projeto é propor uma nova arquitetura que preserve as funcionalidades existentes, reduza os problemas identificados e facilite futuras expansões do sistema.
+## Navegação
 
-Esta Wiki centraliza toda a documentação técnica do projeto, incluindo requisitos, decisões arquiteturais, diagramas, análises e demais artefatos produzidos durante o desenvolvimento do Capstone.
+1. [Requisitos](home/01-Requisitos.md)
+   - [Análise de Lacunas](home/01-Requisitos/Analise-de-Lacunas.md)
+   - [Requisitos Funcionais](home/01-Requisitos/Requisitos-Funcionais.md)
+   - [Requisitos Não Funcionais](home/01-Requisitos/Requisitos-Nao-Funcionais.md)
+   - [Priorização](home/01-Requisitos/Priorizacao.md)
+2. [Arquitetura](home/02-Arquitetura.md)
+   - [Visão Geral](home/02-Arquitetura/Visao-Geral.md)
+   - [Diagramas C4](home/02-Arquitetura/Diagramas-C4.md)
+   - [Decisões de Arquitetura vs. Design](home/02-Arquitetura/Decisoes-Arquitetura-vs-Design.md)
+   - [Atributos de Qualidade](home/02-Arquitetura/Atributos-de-Qualidade.md)
+3. [Análise de Trade-offs](home/03-Trade-offs.md)
+4. [Cronograma e Riscos](home/04-Cronograma-e-Riscos.md)
+5. [Apresentações](home/05-Apresentacoes.md)
+   - [Apresentação Parcial 1](home/05-Apresentacoes/Apresentacao-Parcial-1.md)
+   - [Apresentação Final](home/05-Apresentacoes/Apresentacao-Final.md)
+7. [Implementação Referencial](home/07-Implementacao-Referencial.md)
 
----
+## Estado atual
 
-# Estrutura da Wiki
-
-## 📋 Projeto
-
-Informações gerais sobre o Prometheus V2, seus objetivos, escopo e contexto.
-
-- Visão Geral
-
----
-
-## 📑 Requisitos
-
-Documentação dos requisitos levantados para o novo sistema.
-
-- Análise de Lacunas
-- Requisitos Funcionais
-- Requisitos Não Funcionais
-
----
-
-## 🏛 Arquitetura
-
-Documentação da arquitetura proposta.
-
-- Visão Geral
-- Estilo Arquitetural
-- Estratégias Avaliadas
-- Diagramas C4
-- Atributos de Qualidade
-- Trade-offs
-- Decisões Arquiteturais
-
----
-
-## 📅 Gerenciamento
-
-Planejamento do projeto.
-
-- Cronograma
-- Gestão de Riscos
-
----
-
-## 📦 Entregáveis
-
-Documentos produzidos durante o Capstone.
-
-- Proposta Inicial
-- Documento de Arquitetura
-- Trade-offs
-- Apresentações
-
----
-
-# Organização do Projeto
-
-| Item | Local |
-|------|-------|
-| Código-fonte | Repositório GitLab |
-| Documentação | Wiki GitLab |
-| Diagramas | Mermaid / PlantUML |
-| Controle de versão | Git |
-
----
-
-# Tecnologias Utilizadas
-
-- C#
-- ASP.NET Core
-- SQL Server
-- Entity Framework Core
-- REST APIs
-- Git
-- GitLab
-- Mermaid
-- PlantUML
-
----
-
-# Navegação Rápida
-
-- Projeto
-- Requisitos
-- Arquitetura
-- Gerenciamento
-- Entregáveis
+A documentação consolida as atividades acadêmicas produzidas da Semana 1 à Semana 4. As páginas principais usam as decisões mais recentes; as apresentações registram como a análise evoluiu ao longo do trabalho. Tecnologias e fornecedores não confirmados permanecem explicitamente em aberto.

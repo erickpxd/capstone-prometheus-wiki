@@ -11,7 +11,3 @@ Na Semana 2, a proposta ganhou portais por papel, APIs com responsabilidades def
 ## Ponto de validação
 
 Ao final dessa etapa, a direção era um monólito modular centrado inicialmente em dados compartilhados. API REST foi entendida como contrato, não como sinônimo de microsserviço. Banco dedicado de notas, cache, autenticação por tokens e tecnologias específicas permaneciam propostas a validar.
-
-## Inconsistência histórica
-
-O primeiro laboratório continha descrições de diagramas do projeto “SkyDelivery”, incluindo drones, rotas e pagamento. Esses elementos não pertencem ao Prometheus e não foram incorporados à arquitetura. O registro é mantido apenas para explicar a divergência do artefato acadêmico original.

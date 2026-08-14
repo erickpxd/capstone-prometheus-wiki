@@ -8,4 +8,4 @@ O GRA troca informações de notas por API REST e *webhooks*. A plataforma exter
 
 ## Estado
 
-/home/erickpxd/Imagens/Capturas de tela/Captura de tela de 2026-07-19 21-15-51.png
+![Captura_de_tela_de_2026-07-19_21-15-51](uploads/9d118ca185cda520cbcba2d2fcab4570/Captura_de_tela_de_2026-07-19_21-15-51.png){width=830 height=600}

@@ -1,6 +1,6 @@
 # 5. Apresentações
 
-Esta seção reúne o registro textual das apresentações do Capstone. Ela preserva a evolução do trabalho sem duplicar toda a documentação arquitetural.
+Esta seção reúne o registro textual das apresentações do Capstone. Ela preserva a evolução do trabalho até a Semana 5 sem duplicar toda a documentação arquitetural.
 
 - [Apresentação Parcial 1](05-Apresentacoes/Apresentacao-Parcial-1.md)
 - [Apresentação Final](05-Apresentacoes/Apresentacao-Final.md)

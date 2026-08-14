@@ -1,10 +1,10 @@
 # Nível 1 — Contexto
 
-## Escopo do diagrama futuro
+## Leitura consolidada
 
-O diagrama de contexto deverá apresentar o Prometheus V2 como uma única unidade e relacioná-lo aos atores Administrador, Professor, Estudante e Pai ou Responsável. Os únicos sistemas externos confirmados são o GRA e a plataforma de videoconferência.
+O diagrama de contexto apresenta o Prometheus V2 como uma única unidade e o relaciona aos atores Administrador, Professor, Estudante e Pai ou Responsável. As dependências externas documentadas são o GRA, a plataforma de videoconferência e a infraestrutura de CDN/Object Storage usada pelos conteúdos.
 
-O GRA troca informações de notas por API REST e *webhooks*. A plataforma externa oferece sessões e gravações. CDN, banco de dados, APIs e filas não pertencem a este nível, pois são detalhes internos da solução.
+O GRA troca informações de notas por API REST e *webhooks*. A plataforma externa oferece sessões e gravações. A presença da CDN/Object Storage registra uma dependência de infraestrutura do Prometheus; banco de dados, APIs, fila e workers continuam fora deste nível por serem detalhes internos da solução.
 
 ## Estado
 

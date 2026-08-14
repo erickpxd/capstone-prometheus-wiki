@@ -1,6 +1,6 @@
 # 2. Arquitetura
 
-Esta seção corresponde ao Documento de Design de Arquitetura. Ela apresenta o estilo escolhido, os limites dos módulos, os atributos de qualidade e a distinção entre decisões estruturais e escolhas de implementação.
+Esta seção corresponde ao Documento de Design de Arquitetura. Ela apresenta o estilo escolhido, os limites dos módulos, os atributos de qualidade, as respostas aos gargalos de desempenho e a proposta de disponibilidade, além da distinção entre decisões estruturais e escolhas de implementação.
 
 - [Visão Geral](02-Arquitetura/Visao-Geral.md)
 - [Diagramas C4](02-Arquitetura/Diagramas-C4.md)

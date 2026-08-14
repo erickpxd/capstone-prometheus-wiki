@@ -39,6 +39,8 @@ Grades controla avaliações, lançamento e consulta de notas, cálculo acadêmi
 
 A geração de PDFs é retirada do fluxo síncrono e enviada a uma fila processada em segundo plano. Isso permite atender ao requisito de até 500 relatórios simultâneos sem degradar a navegação. Grades é o principal candidato à escalabilidade horizontal seletiva.
 
+Relatórios de períodos encerrados ou resultados pouco mutáveis podem usar cache ou pré-computação seletiva. Qualquer mudança de nota, publicação de resultado ou alteração da regra de cálculo deve invalidar o artefato anterior. Os relatórios concluídos são conservados em armazenamento próprio, separado da fila que representa o trabalho pendente.
+
 ### Videos API
 
 Videos coordena agendamento, autorização, links de acesso e gravações. A transmissão de áudio e vídeo é delegada a uma plataforma externa especializada. O material cita 100ms.live apenas como exemplo, não como fornecedor escolhido.
@@ -64,6 +66,30 @@ Para Grades, os materiais propõem como evolução um repositório individual, p
 Content mantém metadados e referências, o armazenamento dedicado conserva o arquivo e a CDN distribui o ativo. Retirar o binário do banco não o torna público: autorização, vínculo com o curso, exclusão e retenção continuam sob controle do Prometheus.
 
 Essa estrutura atende ao requisito de carregamento inferior a dois segundos para apresentações e PDFs acessados fora da rede interna. Gravações e portfólios podem usar a mesma capacidade de armazenamento, respeitando políticas próprias.
+
+## Diagnóstico e resposta de desempenho
+
+O estudo da Semana 5 localiza dois gargalos principais no V1. A geração síncrona de relatórios compete por CPU, memória, conexões e operações de entrada e saída com a navegação comum. O download de BLOBs faz o banco transacional atuar também como servidor de arquivos e disputar recursos com usuários, cursos e notas. O material não comprova que bloqueios do banco sejam a causa específica; a conclusão segura é a existência de contenção em recursos compartilhados.
+
+Para relatórios, a resposta combina cache seletivo, fila durável, múltiplos *workers* e armazenamento do resultado. A fila absorve variações de entrada e separa a velocidade das solicitações da capacidade de processamento. Vários *workers* oferecem paralelismo; adicionar instâncias amplia horizontalmente a capacidade. Para conteúdos, Object Storage mantém a origem persistente e a CDN distribui e armazena cópias próximas aos usuários.
+
+Essas técnicas não comprovam desempenho ou disponibilidade isoladamente. Elas exigem políticas de invalidação, durabilidade da fila, autorização dos ativos, métricas e testes de carga com navegação concorrente.
+
+## Alta disponibilidade e degradação controlada
+
+A meta global de 99,9% equivale, como referência, a cerca de 43,2 minutos de indisponibilidade em 30 dias. A proposta conceitual combina redundância, balanceamento, health checks, failover e fallback; nenhum desses mecanismos garante a meta sozinho.
+
+Grades e Videos são os componentes críticos analisados. Quando puderem ser executados em múltiplas instâncias, o modelo proposto é ativo/ativo atrás de um Load Balancer, que deixa de encaminhar tráfego a instâncias não saudáveis. A própria camada de balanceamento também precisa ser redundante ou fornecida por uma infraestrutura de alta disponibilidade. No monólito modular inicial, essa redundância pode exigir replicar a unidade de implantação; a escala isolada de uma API pressupõe uma evolução arquitetural explicitamente justificada.
+
+Os *workers* de relatórios também podem ser redundantes sobre uma fila durável. Se um deles falhar, o trabalho não confirmado permanece disponível para processamento posterior. Caso Grades adquira persistência independente, a Semana 5 avalia uma topologia *primary/standby* com replicação e promoção da réplica. Essa opção não está fechada: RPO, RTO, consistência, perda admissível de dados e procedimento de reconexão ainda precisam ser definidos e testados.
+
+Falhas externas exigem degradação elegante. Se o provedor de vídeo estiver indisponível, cursos, conteúdos, fóruns e notas continuam acessíveis, enquanto as operações dependentes da sala exibem indisponibilidade temporária. Se o GRA falhar, a nota confirmada localmente permanece registrada e o Grades Bridge tenta sincronizá-la posteriormente.
+
+## Saúde e observabilidade
+
+Componentes críticos devem expor verificações que distingam processo em execução de instância pronta para receber tráfego. O monitoramento deve acompanhar disponibilidade, latência, erros, CPU, memória, instâncias saudáveis, tamanho e idade das filas, duração dos relatórios e falhas das integrações externas.
+
+Prometheus Monitoring, Grafana e Alertmanager aparecem no estudo como ferramentas possíveis para coleta, visualização e alertas. Esses produtos não foram selecionados como implementação definitiva. Uma verificação externa também deve medir a disponibilidade pela perspectiva do usuário, complementando as métricas internas. O nome **Prometheus Monitoring** deve ser usado quando necessário para evitar confusão com o LMS Prometheus V2.
 
 ## Modularidade interna
 

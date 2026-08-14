@@ -10,6 +10,8 @@ O Prometheus V2 deve atingir disponibilidade mínima de **99,9% de tempo de ativ
 
 A meta é global e não pode ser atribuída isoladamente a um Load Balancer, réplica ou cache. Ela depende da eliminação de pontos únicos de falha, da detecção e recuperação de falhas, do monitoramento e da degradação controlada de dependências externas. No monólito modular, escala independente exige especialização prévia do componente; Grades é o principal candidato documentado.
 
+Em uma janela ilustrativa de 30 dias, 99,9% correspondem a aproximadamente **43,2 minutos de indisponibilidade permitida**. Esse valor ajuda a comunicar o orçamento de indisponibilidade, mas a aceitação ainda depende da definição formal da janela de medição, das funções incluídas e das exclusões acordadas.
+
 **Atributos relacionados:** disponibilidade, resiliência e escalabilidade.
 
 **Critério principal:** disponibilidade mínima de 99,9% no período e nas funções definidos para a medição do LMS.

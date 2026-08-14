@@ -12,6 +12,9 @@ Decisões arquiteturais definem estruturas de alto impacto, influenciam atributo
 | Sincronizar o GRA de forma assíncrona | Arquitetura | Determina integração, disponibilidade e consistência. |
 | Processar relatórios em fila e *worker* | Arquitetura | Introduz componentes para desempenho e escala. |
 | Reduzir estado local | Arquitetura | Habilita balanceamento e múltiplas instâncias. |
+| Usar redundância ativa/ativa em componentes críticos | Arquitetura | Altera implantação, roteamento e tratamento de falhas. |
+| Avaliar réplica *primary/standby* para Grades | Arquitetura | Afeta persistência, recuperação, consistência, RPO e RTO. |
+| Definir endpoints de saúde e telemetria | Arquitetura | Sustenta roteamento, diagnóstico e resposta operacional. |
 | Usar padrão Repository internamente | Design | Organiza o acesso aos dados de um componente. |
 | Escolher linguagem ou biblioteca visual | Design | Não altera necessariamente os limites do sistema. |
 | Nomear classes e métodos | Design | Afeta apenas a organização interna do código. |
@@ -56,6 +59,16 @@ A aplicação deve evitar sessão exclusivamente na memória de uma instância. 
 
 Eventos e filas são usados para relatórios, notificações, auditoria e integrações tolerantes a atraso. Operações acadêmicas que exigem confirmação permanecem síncronas no contexto principal.
 
+### DA-10 — Disponibilidade seletiva e isolamento de falhas
+
+Grades, Report Workers e Videos recebem prioridade na proposta de redundância. Instâncias preparadas para execução concorrente podem operar em modo ativo/ativo atrás de balanceamento com health checks. A falha de vídeo ou GRA deve limitar apenas a capacidade dependente, preservando o restante do LMS por fallback e processamento posterior.
+
+Essa decisão descreve uma direção arquitetural. Ela não confirma que cada API já possua implantação independente nem transforma automaticamente o monólito modular em microsserviços.
+
+### DA-11 — Observabilidade orientada à operação
+
+Disponibilidade e fluxos assíncronos devem ser avaliados por métricas, logs, alertas, saúde das instâncias e verificações externas. Prometheus Monitoring, Grafana e Alertmanager são opções estudadas, não produtos contratados ou implementados.
+
 ## Pontos ainda abertos
 
-SGBD do V2, produto de mensageria, autenticação, cache, fornecedor de vídeo e persistência especializada para Grades não são decisões fechadas. JWT, Redis, OAuth/OpenID Connect, NoSQL e 100ms.live aparecem nos estudos apenas como exemplos ou técnicas avaliadas.
+SGBD do V2, produto de mensageria, autenticação, cache, fornecedor de vídeo, Load Balancer, plataforma de observabilidade e persistência especializada para Grades não são decisões fechadas. RPO e RTO da persistência acadêmica também precisam ser definidos. JWT, Redis, OAuth/OpenID Connect, NoSQL, 100ms.live, Prometheus Monitoring, Grafana e Alertmanager aparecem nos estudos apenas como exemplos ou técnicas avaliadas.

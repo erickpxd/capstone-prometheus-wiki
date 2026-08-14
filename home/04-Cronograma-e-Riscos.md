@@ -28,7 +28,9 @@ Disponibilizar acesso por papel, avaliações, fóruns, Portal de Pais com MFA e
 
 ## Marco 7 — Validar e decidir evoluções
 
-Medir disponibilidade, segurança, latência, carga e manutenção. Um módulo só é extraído para implantação independente quando os resultados demonstrarem benefício superior ao custo operacional.
+Medir disponibilidade, segurança, latência, carga e manutenção. Exercitar falha de instância, worker, GRA e provedor de vídeo; validar health checks, failover, fallback, alertas e a perspectiva externa do usuário. Um módulo só é extraído para implantação independente quando os resultados demonstrarem benefício superior ao custo operacional.
+
+Antes de adotar persistência *primary/standby* para Grades, devem ser definidos RPO, RTO, modo de replicação, critérios de promoção e procedimento de reconexão. A meta global de 99,9% também precisa de janela, funções incluídas, SLI e exclusões formalizados.
 
 ## Estratégia de migração
 
@@ -45,13 +47,18 @@ Durante a convivência, deve existir uma fonte de autoridade para cada dado. Uma
 | Perda de dados históricos | Muito alto | Inventário, cópias recuperáveis, lotes validados e retorno |
 | Reprodução do acoplamento | Alto | Propriedade lógica, interfaces e testes arquiteturais |
 | Relatórios degradarem a navegação | Alto | Fila, *worker*, métricas e escala de Grades |
+| Trabalho de relatório ser perdido ou duplicado | Alto | Fila durável, confirmação, idempotência e armazenamento rastreável |
+| Cache apresentar relatório acadêmico desatualizado | Alto | Invalidação por mudança de nota, publicação e regra de cálculo |
 | Indisponibilidade do GRA | Alto | Grades Bridge, mensagens persistidas e novas tentativas |
-| Falha da plataforma de vídeo | Médio/alto | Isolamento e continuidade das demais funções |
+| Falha da plataforma de vídeo | Médio/alto | Timeout, fallback, mensagem explícita e continuidade das demais funções |
 | Exposição de dados | Muito alto | Criptografia, autorização, MFA e auditoria |
 | Inconsistência entre metadado e arquivo | Alto | Verificação de integridade e política de retenção |
 | Banco central continuar como gargalo | Alto | CDN, medição e avaliação de persistência dedicada |
 | Mensagens duplicadas ou perdidas | Alto | Idempotência, rastreamento e reconciliação |
 | Distribuição prematura da arquitetura | Médio/alto | Critérios mensuráveis antes da extração |
+| Load Balancer tornar-se ponto único de falha | Alto | Camada redundante ou serviço com alta disponibilidade comprovada |
+| Failover de Grades causar perda ou recuperação lenta | Muito alto | Definir RPO/RTO, testar replicação, promoção e reconexão |
+| Falha ser detectada tarde | Alto | Health checks, métricas, alertas e monitoramento externo |
 | Mudança de contrato externo | Médio | Adaptadores isolados e plano de substituição |
 
 Os riscos devem ser reavaliados a cada marco. Migração e segurança bloqueiam uma liberação quando recuperação e proteção não tiverem sido demonstradas.

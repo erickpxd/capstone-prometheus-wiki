@@ -12,7 +12,7 @@ Criptografia, expiração de sessão, controle por papel, auditoria e MFA proteg
 
 ## Desempenho versus consistência
 
-Cache pode reduzir consultas e latência, porém corre o risco de devolver informações desatualizadas. Dados pouco mutáveis, como descrições de cursos, são candidatos mais seguros. Notas exigem invalidação ou atualização imediata. Cache permanece uma técnica avaliada, não um produto selecionado.
+Cache pode reduzir consultas e latência, porém corre o risco de devolver informações desatualizadas. Dados pouco mutáveis, como descrições de cursos e relatórios de períodos encerrados, são candidatos mais seguros. Alteração de nota, republicação de resultado ou mudança da regra de cálculo precisa invalidar o artefato acadêmico afetado. Cache permanece uma técnica avaliada, não um produto selecionado.
 
 ## Assincronia versus resposta imediata
 
@@ -30,6 +30,18 @@ Armazenamento dedicado e CDN reduzem a carga do banco e aproximam arquivos dos u
 
 GRA e plataforma de videoconferência oferecem capacidades que não devem ser reproduzidas integralmente. Essa especialização reduz esforço, mas expõe o LMS a latência, indisponibilidade e mudança de contrato. Adaptadores, filas, novas tentativas e degradação controlada limitam o impacto.
 
+## Redundância versus custo operacional
+
+Múltiplas instâncias, Load Balancer, réplica de banco, workers redundantes e monitoramento reduzem o impacto de falhas isoladas, mas aumentam infraestrutura, configuração, testes e operação. A proposta prioriza Grades, Reports e Videos em vez de duplicar indiscriminadamente todos os componentes. O Load Balancer também precisa ser redundante para não substituir vários pontos de falha por um único ponto central.
+
+## Failover versus consistência e tempo de recuperação
+
+Uma réplica *standby* pode restaurar a persistência de Grades após falha do primário, mas a promoção e a reconexão não são instantâneas. Replicação assíncrona pode admitir perda recente; replicação mais rígida pode aumentar latência. A escolha só pode ser fechada depois de definir RPO, RTO, consistência exigida e procedimentos de teste.
+
+## Serviço completo versus degradação elegante
+
+Manter todas as funções disponíveis durante uma falha externa seria ideal, mas o Prometheus não controla o provedor de vídeo nem o GRA. O compromisso é preservar o núcleo do LMS: vídeo indisponível não bloqueia cursos e notas; GRA indisponível não desfaz a confirmação local. O usuário recebe um estado explícito enquanto recuperação ou sincronização ocorre posteriormente.
+
 ## Síntese
 
 | Escolha | Benefício | Custo aceito |
@@ -39,3 +51,6 @@ GRA e plataforma de videoconferência oferecem capacidades que não devem ser re
 | Processamento assíncrono | Responsividade e isolamento | Efeitos secundários concluídos posteriormente |
 | Banco central inicial | Migração e transações mais simples | Possível contenção entre domínios |
 | Plataformas externas | Uso de capacidades especializadas | Dependência de contratos e disponibilidade |
+| Redundância seletiva | Menor impacto de falhas em capacidades críticas | Mais infraestrutura e operação |
+| Persistência *primary/standby* | Possibilidade de failover de Grades | Risco de perda recente e recuperação não instantânea |
+| Degradação elegante | Continuidade do núcleo do LMS | Função dependente temporariamente limitada |

@@ -27,4 +27,4 @@ Esta Home funciona apenas como índice. O conteúdo acadêmico está organizado 
 
 ## Estado atual
 
-A documentação consolida as atividades acadêmicas produzidas da Semana 1 à Semana 4. As páginas principais usam as decisões mais recentes; as apresentações registram como a análise evoluiu ao longo do trabalho. Tecnologias e fornecedores não confirmados permanecem explicitamente em aberto.
+A documentação consolida as atividades acadêmicas produzidas da Semana 1 à Semana 5. As páginas principais usam as decisões mais recentes; as apresentações registram como a análise evoluiu ao longo do trabalho. A etapa atual acrescenta o diagnóstico dos gargalos de conteúdo e relatórios e uma proposta conceitual de alta disponibilidade para Grades e Videos. Tecnologias, fornecedores e detalhes de implantação não confirmados permanecem explicitamente em aberto.

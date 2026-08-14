@@ -8,4 +8,4 @@ O GRA troca informações de notas por API REST e *webhooks*. A plataforma exter
 
 ## Estado
 
-Diagrama não incluído nesta versão da Wiki. A página permanece para manter o entregável rastreável na navegação do GitLab.
+/home/erickpxd/Imagens/Capturas de tela/Captura de tela de 2026-07-19 21-15-51.png

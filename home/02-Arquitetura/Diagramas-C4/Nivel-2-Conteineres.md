@@ -8,4 +8,4 @@ As APIs precisam permanecer visualmente dentro do limite do monólito modular, s
 
 ## Estado
 
-Diagrama não incluído nesta versão da Wiki. A página permanece para manter o entregável rastreável na navegação do GitLab.
+![Prometheus_V2_C4_Nivel_2](uploads/00b42cb148199a436202def1683af916/Prometheus_V2_C4_Nivel_2.png){width=900 height=454}

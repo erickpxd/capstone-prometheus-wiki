@@ -1,6 +1,8 @@
 # 1. Requisitos
 
-Esta seção corresponde à Proposta Inicial e ao levantamento de requisitos do Capstone. Ela parte dos problemas do Prometheus V1, organiza as capacidades esperadas no V2 e prioriza os requisitos que mais influenciam a arquitetura.
+Esta seção corresponde à Proposta Inicial e ao levantamento consolidado de requisitos do Capstone. Ela parte dos problemas do Prometheus V1, distingue capacidades herdadas de requisitos adicionais, registra critérios não funcionais mensuráveis e relaciona cada necessidade aos domínios arquiteturais afetados.
+
+Para preservar a rastreabilidade do material, capacidades existentes e objetivos originais usam a identificação `RF-BASE-XX`; os requisitos adicionais mantêm `RF01–RF12`; e os requisitos não funcionais mantêm `RNF01–RNF05`.
 
 - [Análise de Lacunas](01-Requisitos/Analise-de-Lacunas.md)
 - [Requisitos Funcionais](01-Requisitos/Requisitos-Funcionais.md)

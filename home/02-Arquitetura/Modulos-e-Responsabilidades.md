@@ -86,6 +86,8 @@ Nessa leitura proposta:
 - compartilhar fisicamente o banco SQL não constitui *Shared Kernel*: não há decisão de compartilhar deliberadamente um único modelo de domínio entre contextos;
 - relações *upstream/downstream*, linguagens publicadas, eventos e responsabilidades de equipe ainda precisam de descoberta e não são contratos vigentes por simples aparição no mapa.
 
+![image](uploads/b6d0beca1718c25f4c4c2a4a8d3d3478/image.png){width=900 height=438}
+
 O [mapa de contextos DDD proposto em PlantUML](/home/02-Arquitetura/Fonte-PlantUML-Mapa-de-Contextos-DDD-Proposto) visualiza essa hipótese dentro da implantação inicialmente unificada. Ele é complementar e não substitui os diagramas C4 vigentes.
 
 ## Organização interna de Grades

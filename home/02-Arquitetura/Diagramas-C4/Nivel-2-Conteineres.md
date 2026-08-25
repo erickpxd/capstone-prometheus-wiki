@@ -10,70 +10,7 @@ Grades Bridge e Report Workers também aparecem como responsabilidades dentro da
 
 ## Diagrama
 
-```mermaid
-flowchart LR
-    accTitle: Prometheus V2 — visão conceitual de contêineres e responsabilidades
-    accDescr: O Prometheus V2 é uma unidade inicial de implantação com módulos e responsabilidades lógicas, persistência compartilhada e integrações externas.
-
-    user["Usuário autorizado"]
-    gra["GRA — sistema externo"]
-    videoProvider["Video Provider — sistema externo"]
-
-    subgraph prometheus["Prometheus V2"]
-        direction TB
-
-        subgraph app["Aplicação modular — unidade inicial de implantação"]
-            direction TB
-            portal["Portal Web / interface"]
-
-            subgraph modules["Módulos lógicos — não são unidades de implantação"]
-                direction LR
-                users["Users"]
-                courses["Courses"]
-                content["Content"]
-                grades["Grades"]
-                videos["Videos"]
-            end
-
-            gradesBridge["Grades Bridge — responsabilidade lógica"]
-            reportWorkers["Report Workers — responsabilidade lógica"]
-        end
-
-        sql[("Banco SQL principal compartilhado — propriedade lógica por módulo")]
-        objectStorage[("Object Storage / Report Storage — abstração")]
-        cdn["CDN — abstração"]
-        messaging["Filas / Message Broker — abstração"]
-    end
-
-    user -->|acessa| portal
-    portal --> users
-    portal --> courses
-    portal --> content
-    portal --> grades
-    portal --> videos
-
-    users -->|dados sob propriedade lógica| sql
-    courses -->|dados sob propriedade lógica| sql
-    content -->|metadados e referências| sql
-    grades -->|notas e estados| sql
-    videos -->|contexto acadêmico| sql
-
-    content -->|armazena binários| objectStorage
-    portal -->|solicita conteúdo| cdn
-    cdn -->|obtém da origem| objectStorage
-
-    grades -->|publica trabalhos assíncronos| messaging
-    messaging -->|trabalhos de relatório| reportWorkers
-    reportWorkers -->|consulta dados autorizados| sql
-    reportWorkers -->|armazena PDFs| objectStorage
-
-    messaging -->|sincronização de notas| gradesBridge
-    gradesBridge -->|contrato de integração| gra
-    gra -->|notificações externas| gradesBridge
-    gradesBridge -->|estado e reconciliação| grades
-
-    videos -->|solicita transmissão| videoProvider
-```
+![image](uploads/1d5a1c663088ffec0058b156f1c9795a/image.png){width=900 height=416}
 
 A [fonte editável equivalente em PlantUML](/home/02-Arquitetura/Diagramas-C4/Fonte-PlantUML-Nivel-2-Conteineres) representa os contêineres sem transformar módulos, Grades Bridge ou Report Workers em contêineres próprios. A versão deve ser renderizada e revisada antes de substituir o diagrama exibido acima.
 

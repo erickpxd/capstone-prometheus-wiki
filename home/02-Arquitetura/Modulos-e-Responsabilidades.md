@@ -37,6 +37,8 @@ Da mesma forma, identificar um subdomínio ou propor um contexto delimitado não
 
 Esses limites buscam alta coesão, baixo acoplamento e encapsulamento. Cada módulo deve controlar suas regras e oferecer contratos aos consumidores, evitando acesso direto às estruturas internas de outro domínio.
 
+![image](uploads/b6d0beca1718c25f4c4c2a4a8d3d3478/image.png){width=900 height=438}
+
 Uma visão editável desses limites está na [fonte PlantUML de Módulos e Responsabilidades](/home/02-Arquitetura/Fonte-PlantUML-Modulos-e-Responsabilidades). As setas do desenho representam colaborações lógicas, não chamadas de rede obrigatórias.
 
 ## Responsabilidades internas identificadas
@@ -85,8 +87,6 @@ Nessa leitura proposta:
 - Object Storage, CDN, Video Provider e renderização técnica de PDF são infraestrutura, serviço externo ou mecanismo de implementação, não subdomínios de negócio por si mesmos;
 - compartilhar fisicamente o banco SQL não constitui *Shared Kernel*: não há decisão de compartilhar deliberadamente um único modelo de domínio entre contextos;
 - relações *upstream/downstream*, linguagens publicadas, eventos e responsabilidades de equipe ainda precisam de descoberta e não são contratos vigentes por simples aparição no mapa.
-
-![image](uploads/b6d0beca1718c25f4c4c2a4a8d3d3478/image.png){width=900 height=438}
 
 O [mapa de contextos DDD proposto em PlantUML](/home/02-Arquitetura/Fonte-PlantUML-Mapa-de-Contextos-DDD-Proposto) visualiza essa hipótese dentro da implantação inicialmente unificada. Ele é complementar e não substitui os diagramas C4 vigentes.
 

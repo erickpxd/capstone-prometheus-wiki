@@ -22,9 +22,11 @@ O sistema deve permitir criação, consulta, edição e administração dos curs
 
 ### RF-BASE-03 — Gestão e entrega de conteúdos
 
-O sistema deve permitir que professores disponibilizem materiais relacionados aos cursos e que estudantes autorizados consultem ou realizem o download desses conteúdos. No V2, a função deve operar sobre a estratégia de Content API, armazenamento dedicado e CDN, sem devolver os arquivos binários ao banco principal.
+O sistema deve permitir que professores disponibilizem materiais relacionados aos cursos e que estudantes autorizados consultem ou realizem o download desses conteúdos.
 
 **Atores principais:** Professor e Estudante.
+
+**Referência arquitetural:** a persistência e a distribuição dos arquivos são tratadas em [Dados e Integrações](/home/02-Arquitetura/Dados-e-Integracoes).
 
 ### RF-BASE-04 — Gestão de notas e relatórios
 
@@ -52,9 +54,11 @@ O sistema deve disponibilizar fóruns relacionados aos cursos para promover disc
 
 ### RF-BASE-08 — Videoconferências
 
-O sistema deve permitir o agendamento e a participação em sessões de videoconferência associadas aos cursos. O Prometheus administra o contexto acadêmico e integra uma plataforma externa especializada para transmissão de áudio e vídeo.
+O sistema deve permitir o agendamento e a participação em sessões de videoconferência associadas aos cursos.
 
 **Atores principais:** Professor e Estudante.
+
+**Referência arquitetural:** a divisão de responsabilidades e a integração necessária são tratadas em [Dados e Integrações](/home/02-Arquitetura/Dados-e-Integracoes).
 
 ### RF-BASE-09 — Acesso web externo
 
@@ -70,9 +74,11 @@ O sistema deve disponibilizar um portal com acesso limitado para que pais ou res
 
 ### RF-BASE-11 — Integração com o sistema GRA
 
-O Prometheus deve integrar-se ao GRA utilizando os mecanismos disponibilizados pelo sistema externo, incluindo API REST e *webhooks*. O objetivo é eliminar a transcrição manual de notas e reduzir atraso e erro operacional. A sincronização deve respeitar o desacoplamento definido no RNF04.
+O Prometheus deve integrar-se automaticamente ao GRA para eliminar a transcrição manual de notas e reduzir atraso e erro operacional.
 
 **Atores principais:** Professor e Sistema.
+
+**Referência arquitetural:** os contratos e o fluxo de sincronização são tratados em [Dados e Integrações](/home/02-Arquitetura/Dados-e-Integracoes); o comportamento de desacoplamento permanece definido no [RNF04](/home/01-Requisitos/Requisitos-Nao-Funcionais).
 
 ### RF-BASE-12 — Autenticação e controle por perfil
 
@@ -180,4 +186,14 @@ O sistema deve disponibilizar comunicação entre professores e estudantes por c
 
 ## Rastreabilidade
 
-A associação inicial entre os requisitos, domínios e atributos de qualidade está registrada na página de [Priorização](Priorizacao.md). Essa associação orienta a decomposição, mas não cria automaticamente novos microsserviços para cada responsabilidade.
+A associação inicial entre os requisitos, domínios e atributos de qualidade está registrada na página de [Priorização](/home/01-Requisitos/Priorizacao). Essa associação orienta a decomposição, mas não cria automaticamente novos microsserviços para cada responsabilidade.
+
+Referências relacionadas:
+
+- [Requisitos Não Funcionais](/home/01-Requisitos/Requisitos-Nao-Funcionais);
+- [Priorização](/home/01-Requisitos/Priorizacao);
+- [Módulos e Responsabilidades](/home/02-Arquitetura/Modulos-e-Responsabilidades);
+- [Dados e Integrações](/home/02-Arquitetura/Dados-e-Integracoes);
+- [Processamento Assíncrono de Relatórios](/home/02-Arquitetura/Processamento-Assincrono-de-Relatorios);
+- [Decisões Arquiteturais](/home/02-Arquitetura/Decisoes-Arquiteturais);
+- [Architecture Decision Records](/home/02-Arquitetura/ADRs).

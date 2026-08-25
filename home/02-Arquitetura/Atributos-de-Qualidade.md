@@ -1,34 +1,53 @@
 # Atributos de Qualidade
 
-Os atributos de qualidade relacionam os problemas do V1 às decisões estruturais do V2.
+## Estado documental e regra de precedência
 
-| Atributo | Problema de origem | Resposta arquitetural |
+Esta página interpreta os requisitos não funcionais da arquitetura proposta do Prometheus V2 como cenários de qualidade verificáveis. Ela não cria ou redefine RNFs, não substitui decisões arquiteturais e não comprova implementação.
+
+A precedência documental é:
+
+- o RNF define a obrigação ou meta;
+- esta página traduz a obrigação em estímulo, ambiente, resposta esperada e medida de verificação;
+- DA e ADR registram a decisão arquitetural;
+- Trade-offs registra a relação entre benefício e custo;
+- Tecnologias e Pontos Abertos registra produtos e mecanismos ainda não selecionados.
+
+Na tabela, **VIGENTE** indica um comportamento ou cenário sustentado pelos requisitos ou pela arquitetura aceita na documentação; não significa implementação comprovada. **CONDICIONADO** identifica um cenário cuja estratégia concreta depende de decisões futuras.
+
+## Cenários de qualidade
+
+| Atributo | Estímulo | Ambiente | Resposta esperada | Medida/verificação | RNF | DA/ADR | Status |
+|---|---|---|---|---|---|---|---|
+| Desempenho | Usuário autorizado solicita conteúdo acadêmico em acesso externo. | Não especificado | O conteúdo é entregue respeitando a autorização e a arquitetura de armazenamento e entrega definida. | Menos de dois segundos, conforme o RNF03. | [RNF03](/home/01-Requisitos/Requisitos-Nao-Funcionais) | [DA-04](/home/02-Arquitetura/Decisoes-Arquiteturais); [ADR-004](/home/02-Arquitetura/ADRs/ADR-004-Binarios-Fora-do-Banco) | **VIGENTE** |
+| Escalabilidade e desempenho | São solicitados até 500 PDFs simultâneos. | Não especificado | A geração é processada de forma assíncrona, com isolamento da carga em relação à navegação. | Verificar que a navegação não sofre degradação significativa, conforme o RNF05; observar, sem metas ainda definidas, percentis da navegação, fila, throughput, erros e saturação das dependências. | [RNF05](/home/01-Requisitos/Requisitos-Nao-Funcionais) | [DA-05 e DA-09](/home/02-Arquitetura/Decisoes-Arquiteturais); [ADR-005](/home/02-Arquitetura/ADRs/ADR-005-Processamento-Assincrono-de-Relatorios); [ADR-009](/home/02-Arquitetura/ADRs/ADR-009-Assincronia-Seletiva) | **VIGENTE** |
+| Resiliência e interoperabilidade | O GRA está lento ou indisponível durante a sincronização de uma nota já registrada localmente. | Não especificado | O registro local confirmado não é bloqueado; a sincronização posterior preserva idempotência, auditoria, tentativas controladas e reconciliação. | Verificar a confirmação local, a retomada da sincronização e a ausência de notas duplicadas. | [RNF04](/home/01-Requisitos/Requisitos-Nao-Funcionais) | [DA-06 e DA-09](/home/02-Arquitetura/Decisoes-Arquiteturais); [ADR-006](/home/02-Arquitetura/ADRs/ADR-006-Integracao-GRA-por-Grades-Bridge); [ADR-009](/home/02-Arquitetura/ADRs/ADR-009-Assincronia-Seletiva) | **VIGENTE** |
+| Confiabilidade e resiliência | Um Report Worker falha durante o processamento. | Não especificado | O trabalho permanece recuperável para reprocessamento sem corromper o estado do relatório. | Verificar reprocessamento seguro, integridade do estado e ausência de duplicação visível. | [RNF05](/home/01-Requisitos/Requisitos-Nao-Funcionais) | [DA-05 e DA-09](/home/02-Arquitetura/Decisoes-Arquiteturais); [ADR-005](/home/02-Arquitetura/ADRs/ADR-005-Processamento-Assincrono-de-Relatorios); [ADR-009](/home/02-Arquitetura/ADRs/ADR-009-Assincronia-Seletiva) | **VIGENTE** |
+| Resiliência | O Video Provider fica indisponível. | Não especificado | A indisponibilidade da transmissão externa é isolada da navegação e das demais capacidades independentes do LMS. | Verificar que cursos, conteúdos e notas permanecem disponíveis quando a transmissão externa falha. | Não há RNF específico documentado | [DA-07](/home/02-Arquitetura/Decisoes-Arquiteturais); [ADR-007](/home/02-Arquitetura/ADRs/ADR-007-Transmissao-de-Video-Externa); [DA-10 — direção relacionada](/home/02-Arquitetura/Decisoes-Arquiteturais) | **VIGENTE** |
+| Disponibilidade e resiliência | Ocorre uma falha isolada de execução. | Não especificado | Uma falha isolada de execução não deve comprometer desnecessariamente as capacidades independentes do LMS. | Verificação ainda não definida; depende de decisões futuras de implantação, RPO/RTO, redundância e operação. | [RNF01](/home/01-Requisitos/Requisitos-Nao-Funcionais) | [DA-10 e DA-11 — direções relacionadas](/home/02-Arquitetura/Decisoes-Arquiteturais) | **CONDICIONADO** |
+
+## Lacunas de medição
+
+Os ambientes necessários aos seis cenários não estão documentados; por isso, permanecem como “Não especificado”. As lacunas abaixo não criam novos requisitos e não devem ser preenchidas por inferência.
+
+| Atributo | Estado atual | Lacuna |
 |---|---|---|
-| Segurança | Acesso externo e dados sensíveis | Criptografia, autorização por papel, MFA e auditoria |
-| Manutenibilidade | Acoplamento e responsabilidades misturadas | Monólito modular, contratos e decomposição por domínio |
-| Desempenho | PDFs e binários sobrecarregam o sistema | CDN, armazenamento dedicado e processamento em segundo plano |
-| Escalabilidade | Escala vertical insuficiente | Redução de estado e escala horizontal seletiva |
-| Disponibilidade | Picos, falhas de instância e dependências externas | Meta de 99,9%, redundância, health checks, failover e fallback |
-| Confiabilidade | Notas não podem ser perdidas ou duplicadas | Validação, transações, histórico e auditoria |
-| Interoperabilidade | Transcrição manual para o GRA | REST, *webhooks* e contratos de integração |
-| Observabilidade | Fluxos assíncronos e falhas parciais difíceis de diagnosticar | Logs, métricas, rastreamento, health checks, alertas e testes externos |
-| Recuperação | Valor dos dados históricos e falha de persistência | Cópias recuperáveis, plano de migração e estratégia de réplica condicionada |
+| Desempenho de conteúdo | O RNF03 define a meta e a arquitetura registra a forma de armazenamento e entrega. | Tamanho e tipo do arquivo, localização, região, condições de rede, estado do cache e percentil. |
+| Escalabilidade de relatórios | O RNF05 define a carga; processamento assíncrono e isolamento são respostas vigentes. | Duração, mix e tamanho dos relatórios, limite quantitativo de degradação, taxa de erro, throughput, ambiente e capacidade dos Report Workers. O protocolo candidato deve comparar um baseline de navegação, observar p50/p95/p99, profundidade e idade da fila, CPU, memória, conexões e saturação do SQL e variar a quantidade de workers sem presumir ganho linear. |
+| Resiliência | Os comportamentos de GRA, Report Worker e Video Provider são sustentados por requisitos ou decisões. | GRA: autenticação, autoridade, conflitos, timeout e limites de tentativas; relatórios: semântica de entrega e reprocessamento; vídeo: fornecedor, SLA, timeout e políticas de resiliência. |
+| Disponibilidade | O RNF01 define a obrigação; o cenário de falha isolada permanece condicionado. | Ambiente e estratégia concreta de implantação, redundância e operação. |
+| Segurança | O RNF02 define controles verificáveis, mas o cenário operacional completo não está definido. | Protocolos e algoritmos, gestão de chaves, identidade e sessão, fluxo de MFA, matriz de autorização, modelo de ameaças, ambiente e evidência de teste. |
+| Usabilidade | Não há RNF formal de usabilidade no catálogo atual. | Tarefas críticas, acessibilidade, dispositivos, perfis de usuário, métricas, cenário e critérios de aceitação ainda precisam ser descobertos; esta lacuna não cria um novo RNF. |
+| Manutenibilidade | É um atributo importante e possui decisões arquiteturais relacionadas. | Cenário e medida verificável de manutenção e evolução. |
+| Modularidade | DA-02 e DA-03 registram o estilo e os limites lógicos. | Critério verificável de governança dos limites e contratos entre módulos. |
+| Observabilidade | DA-11 define uma direção arquitetural, mas a estratégia concreta permanece aberta. | SLI, retenção, escopo de rastreamento, limiares de alerta, plataforma e modelo operacional. |
+| Recuperação | O [ADR-001](/home/02-Arquitetura/ADRs/ADR-001-Modernizacao-Incremental) registra migração incremental, validação e possibilidade de retorno. | RPO, RTO, backup, restauração, replicação, failover e recuperação de desastre. |
 
-## Cenários arquiteturais atuais
+## Referências relacionadas
 
-| Cenário | Resposta esperada | Verificação necessária |
-|---|---|---|
-| Uma instância preparada para redundância deixa de responder | O Load Balancer retira a instância não saudável e mantém o tráfego nas demais | Teste de health check e failover, incluindo a camada de balanceamento |
-| Um Report Worker falha durante o processamento | O trabalho não confirmado permanece na fila durável e pode ser retomado | Teste de falha, repetição segura e ausência de relatório duplicado |
-| O provedor de vídeo fica indisponível | O restante do LMS continua funcionando e a função afetada apresenta fallback | Teste de timeout e degradação elegante |
-| O GRA fica indisponível após o registro de uma nota | A confirmação local é preservada e a sincronização ocorre posteriormente | Teste de novas tentativas, idempotência, auditoria e reconciliação |
-| Até 500 PDFs são solicitados simultaneamente | A fila e os workers processam a carga sem degradar significativamente a navegação | Teste de carga com tempo de fila, erros e latência concorrente |
-| Um conteúdo representativo é acessado externamente | Object Storage e CDN entregam o ativo em menos de dois segundos | Medição com tamanho, localização, rede e estado do cache definidos |
-
-Uma janela de 30 dias transforma a meta de 99,9% em aproximadamente 43,2 minutos de indisponibilidade permitida. Isso é uma referência de comunicação, não substitui a definição do período, do escopo funcional, do SLI e das regras de cálculo.
-
-## Prioridade
-
-A consolidação das atividades coloca segurança, manutenibilidade, desempenho e escalabilidade entre as maiores preocupações. Disponibilidade e confiabilidade permanecem obrigatórias devido aos RNFs e à natureza dos registros acadêmicos. A proposta de alta disponibilidade da Semana 5 aprofunda Grades, Videos, workers e integrações, mas continua conceitual.
-
-Os atributos geram tensões. MFA aumenta segurança, mas adiciona passos; cache melhora latência, mas pode apresentar dados antigos; assincronia preserva responsividade, mas atrasa efeitos secundários. Esses compromissos são avaliados em [Trade-offs](../03-Trade-offs.md).
+- [Requisitos Não Funcionais](/home/01-Requisitos/Requisitos-Nao-Funcionais)
+- [Decisões Arquiteturais](/home/02-Arquitetura/Decisoes-Arquiteturais)
+- [Architecture Decision Records](/home/02-Arquitetura/ADRs)
+- [Dados e Integrações](/home/02-Arquitetura/Dados-e-Integracoes)
+- [Processamento Assíncrono de Relatórios](/home/02-Arquitetura/Processamento-Assincrono-de-Relatorios)
+- [Tecnologias e Pontos Abertos](/home/02-Arquitetura/Tecnologias-e-Pontos-Abertos)
+- [Análise de Trade-offs](/home/03-Trade-offs)

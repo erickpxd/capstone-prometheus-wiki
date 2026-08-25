@@ -8,23 +8,30 @@ Esta Home funciona apenas como índice. O conteúdo acadêmico está organizado 
 
 ## Navegação
 
-1. [Requisitos](home/01-Requisitos.md)
-   - [Análise de Lacunas](home/01-Requisitos/Analise-de-Lacunas.md)
-   - [Requisitos Funcionais](home/01-Requisitos/Requisitos-Funcionais.md)
-   - [Requisitos Não Funcionais](home/01-Requisitos/Requisitos-Nao-Funcionais.md)
-   - [Priorização](home/01-Requisitos/Priorizacao.md)
-2. [Arquitetura](home/02-Arquitetura.md)
-   - [Visão Geral](home/02-Arquitetura/Visao-Geral.md)
-   - [Diagramas C4](home/02-Arquitetura/Diagramas-C4.md)
-   - [Decisões de Arquitetura vs. Design](home/02-Arquitetura/Decisoes-Arquitetura-vs-Design.md)
-   - [Atributos de Qualidade](home/02-Arquitetura/Atributos-de-Qualidade.md)
-3. [Análise de Trade-offs](home/03-Trade-offs.md)
-4. [Cronograma e Riscos](home/04-Cronograma-e-Riscos.md)
-5. [Apresentações](home/05-Apresentacoes.md)
-   - [Apresentação Parcial 1](home/05-Apresentacoes/Apresentacao-Parcial-1.md)
-   - [Apresentação Final](home/05-Apresentacoes/Apresentacao-Final.md)
-7. [Implementação Referencial](home/07-Implementacao-Referencial.md)
+1. [Requisitos](/home/01-Requisitos)
+   - [Análise de Lacunas](/home/01-Requisitos/Analise-de-Lacunas)
+   - [Requisitos Funcionais](/home/01-Requisitos/Requisitos-Funcionais)
+   - [Requisitos Não Funcionais](/home/01-Requisitos/Requisitos-Nao-Funcionais)
+   - [Priorização](/home/01-Requisitos/Priorizacao)
+2. [Arquitetura](/home/02-Arquitetura)
+   - [Visão Geral](/home/02-Arquitetura/Visao-Geral)
+   - [Módulos e Responsabilidades](/home/02-Arquitetura/Modulos-e-Responsabilidades)
+   - [Dados e Integrações](/home/02-Arquitetura/Dados-e-Integracoes)
+   - [Processamento Assíncrono de Relatórios](/home/02-Arquitetura/Processamento-Assincrono-de-Relatorios)
+   - [Atributos de Qualidade](/home/02-Arquitetura/Atributos-de-Qualidade)
+   - [Tecnologias e Pontos Abertos](/home/02-Arquitetura/Tecnologias-e-Pontos-Abertos)
+   - [Decisões Arquiteturais](/home/02-Arquitetura/Decisoes-Arquiteturais)
+   - [Architecture Decision Records](/home/02-Arquitetura/ADRs)
+   - [Diagramas C4](/home/02-Arquitetura/Diagramas-C4)
+3. [Análise de Trade-offs](/home/03-Trade-offs)
+4. [Cronograma e Riscos](/home/04-Cronograma-e-Riscos)
+5. [Apresentações](/home/05-Apresentacoes)
+   - [Apresentação Parcial 1](/home/05-Apresentacoes/Apresentacao-Parcial-1)
+   - [Apresentação Final](/home/05-Apresentacoes/Apresentacao-Final)
+7. [Implementação Referencial](/home/07-Implementacao-Referencial)
 
 ## Estado atual
 
-A documentação consolida as atividades acadêmicas produzidas da Semana 1 à Semana 5. As páginas principais usam as decisões mais recentes; as apresentações registram como a análise evoluiu ao longo do trabalho. A etapa atual acrescenta o diagnóstico dos gargalos de conteúdo e relatórios e uma proposta conceitual de alta disponibilidade para Grades e Videos. Tecnologias, fornecedores e detalhes de implantação não confirmados permanecem explicitamente em aberto.
+A Wiki consolida a arquitetura proposta e vigente na documentação; não comprova implementação ou implantação do V2. As fontes canônicas prevalecem sobre recortes temporais preservados nas apresentações. Tecnologias, fornecedores e topologias não decididos permanecem explicitamente abertos ou condicionados.
+
+A numeração segue os entregáveis identificados no material do Capstone. Não foi confirmado um entregável público `06`; por isso, o índice preserva o salto de `05` para `07` sem preencher a lacuna por conveniência.

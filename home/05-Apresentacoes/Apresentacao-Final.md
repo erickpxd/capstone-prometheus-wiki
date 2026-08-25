@@ -1,5 +1,9 @@
 # Apresentação Final
 
+## Estado documental
+
+Apesar do título acadêmico, esta página preserva o recorte da apresentação consolidada até a Semana 5. Ela não representa necessariamente o estado documental posterior, não comprova implementação e não substitui as páginas canônicas. Hipóteses de tecnologia, redundância e implantação citadas abaixo devem ser lidas no contexto daquele recorte.
+
 ## Problema
 
 O Prometheus V1 atende à School X há quinze anos, mas sua estrutura monolítica pouco modular, estado local, banco central com binários e ausência de integrações limitam desempenho, manutenção e crescimento. Os dados históricos impedem uma substituição imediata.
@@ -14,7 +18,7 @@ Users, Courses, Content, Grades e Videos formam os limites principais. Portais a
 
 As atividades da Semana 4 aprofundaram coesão, acoplamento e encapsulamento. Identidade, matrículas, avaliações, notas e comunicação foram reconhecidos como responsabilidades internas mais específicas, sem serem transformados automaticamente em serviços independentes.
 
-Na Semana 5, o diagnóstico de desempenho evitou atribuir os gargalos a uma causa não comprovada: a evidência disponível demonstra contenção por recursos compartilhados. A resposta para relatórios combina cache seletivo, fila durável, múltiplos Report Workers e armazenamento do resultado. Para conteúdos, Object Storage mantém a origem dos arquivos e a CDN cuida da distribuição.
+Na Semana 5, o diagnóstico de desempenho evitou atribuir os gargalos a uma causa não comprovada: a evidência disponível demonstra contenção por recursos compartilhados. A resposta então estudada para relatórios combinava cache seletivo, fila durável, múltiplos Report Workers e armazenamento do resultado. Cache, garantias concretas da fila e quantidade ou topologia de workers eram hipóteses daquele recorte, não decisões vigentes nem evidência de implementação. Para conteúdos, Object Storage mantém a origem dos arquivos e a CDN cuida da distribuição.
 
 ## Qualidade e trade-offs
 
@@ -24,7 +28,7 @@ O monólito modular aceita menor independência inicial para reduzir complexidad
 
 ## Disponibilidade e operação
 
-A proposta conceitual de alta disponibilidade prioriza Grades e Videos. Instâncias preparadas para redundância operam em modo ativo/ativo atrás de Load Balancer e health checks; workers redundantes consomem uma fila durável. Caso Grades receba persistência própria, uma réplica *standby* pode permitir failover, mas RPO e RTO ainda precisam ser definidos.
+A proposta conceitual de alta disponibilidade apresentada naquele recorte priorizava Grades e Videos. Modo ativo/ativo, Load Balancer, health checks, workers redundantes, fila durável e réplica *standby* eram hipóteses para avaliação, não uma topologia selecionada ou implantada. Persistência própria de Grades, failover, RPO e RTO também permaneciam abertos.
 
 Falhas externas usam degradação elegante: indisponibilidade do vídeo não interrompe o restante do LMS, e indisponibilidade do GRA não bloqueia a nota já confirmada localmente. Métricas, alertas e verificações externas devem comprovar a meta de 99,9%. Prometheus Monitoring, Grafana e Alertmanager são alternativas estudadas, não ferramentas já adotadas.
 
@@ -35,3 +39,7 @@ Ainda precisam ser definidos o SGBD do V2, produtos de mensageria, armazenamento
 ## Encerramento
 
 A proposta cria uma sequência coerente entre legado, problemas, requisitos, arquitetura e plano de evolução. O V2 não descarta o passado nem distribui prematuramente o sistema: estabelece limites sustentáveis para modernizar o Prometheus de maneira gradual.
+
+## Precedência documental
+
+Para o estado vigente na documentação, consulte a [Visão Geral da Arquitetura](/home/02-Arquitetura/Visao-Geral), as [Decisões Arquiteturais](/home/02-Arquitetura/Decisoes-Arquiteturais) e os [Architecture Decision Records](/home/02-Arquitetura/ADRs). O fluxo canônico de PDFs está em [Processamento Assíncrono de Relatórios](/home/02-Arquitetura/Processamento-Assincrono-de-Relatorios); produtos, mecanismos de resiliência, topologias e fornecedores ainda não escolhidos permanecem em [Tecnologias e Pontos Abertos](/home/02-Arquitetura/Tecnologias-e-Pontos-Abertos).

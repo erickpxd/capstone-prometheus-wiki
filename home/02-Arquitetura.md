@@ -1,16 +1,28 @@
 # 2. Arquitetura
 
-Esta seção corresponde ao Documento de Design de Arquitetura. Ela apresenta o estilo escolhido, os limites dos módulos, os atributos de qualidade, as respostas aos gargalos de desempenho e a proposta de disponibilidade, além da distinção entre decisões estruturais e escolhas de implementação.
+> **Estado documental:** esta seção descreve a arquitetura vigente na documentação do Prometheus V2. Ela não comprova implementação ou implantação.
 
-- [Visão Geral](02-Arquitetura/Visao-Geral.md)
-- [Diagramas C4](02-Arquitetura/Diagramas-C4.md)
-  - [Nível 1 — Contexto](02-Arquitetura/Diagramas-C4/Nivel-1-Contexto.md)
-  - [Nível 2 — Contêineres](02-Arquitetura/Diagramas-C4/Nivel-2-Conteineres.md)
-- [Decisões de Arquitetura vs. Design](02-Arquitetura/Decisoes-Arquitetura-vs-Design.md)
-- [Atributos de Qualidade](02-Arquitetura/Atributos-de-Qualidade.md)
+Esta seção corresponde ao Documento de Design de Arquitetura. A fonte canônica está organizada por responsabilidade documental, sem transformar módulos lógicos em serviços independentes.
 
-## Laboratórios aplicados
+## Visão e estrutura
 
-- [Estratégias de Dimensionamento para o Prometheus V2](02-Arquitetura/laboratorio-escalabilidade-prometheus-v2.md)
-- [Padrões de Resiliência e Tolerância a Falhas](02-Arquitetura/laboratorio-resiliencia-prometheus-v2.md)
-- [Plano de Melhoria de Desempenho — Relatórios PDF](02-Arquitetura/laboratorio-desempenho-relatorios-pdf-prometheus-v2.md)
+- [Visão Geral](/home/02-Arquitetura/Visao-Geral) — V1 × V2, estilo vigente, implantação inicial e mapa da solução;
+- [Módulos e Responsabilidades](/home/02-Arquitetura/Modulos-e-Responsabilidades) — limites lógicos, contratos e propriedade de regras;
+- [Dados e Integrações](/home/02-Arquitetura/Dados-e-Integracoes) — persistência, armazenamento e sistemas externos;
+- [Processamento Assíncrono de Relatórios](/home/02-Arquitetura/Processamento-Assincrono-de-Relatorios) — fluxo canônico de PDFs, estados, idempotência e falhas;
+- [Atributos de Qualidade](/home/02-Arquitetura/Atributos-de-Qualidade) — cenários e formas de verificação;
+- [Tecnologias e Pontos Abertos](/home/02-Arquitetura/Tecnologias-e-Pontos-Abertos) — abstrações, alternativas estudadas e escolhas pendentes.
+
+## Decisões
+
+- [Decisões Arquiteturais](/home/02-Arquitetura/Decisoes-Arquiteturais) — inventário DA-01–DA-11 e seus estados;
+- [Architecture Decision Records](/home/02-Arquitetura/ADRs) — contexto e consequências de DA-01 a DA-09;
+- [Análise de Trade-offs](/home/03-Trade-offs) — benefícios, custos e tensões ainda abertas.
+
+## Diagramas
+
+- [Diagramas C4](/home/02-Arquitetura/Diagramas-C4)
+  - [Nível 1 — Contexto](/home/02-Arquitetura/Diagramas-C4/Nivel-1-Contexto)
+  - [Nível 2 — Contêineres](/home/02-Arquitetura/Diagramas-C4/Nivel-2-Conteineres)
+
+O Prometheus V2 permanece documentado como **monólito modular inicialmente implantado como uma unidade**. Tecnologias, topologias e fornecedores sem decisão explícita continuam abertos ou condicionados.

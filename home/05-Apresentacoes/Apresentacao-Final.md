@@ -1,6 +1,6 @@
 # Apresentação Final — Prometheus V2
 
-> Documento de preparação da apresentação oral do Projeto Capstone Prometheus V2.  
+> Documento de preparação da apresentação oral do Projeto Capstone Prometheus V2.\
 > A arquitetura descrita é proposta e vigente na documentação; a implementação comprovada limita-se ao recorte referencial de Users/Identity.
 
 # 1. Resumo executivo
@@ -27,7 +27,7 @@ A implementação realmente desenvolvida é um recorte fullstack de **Users/Iden
 ## Regra de interpretação durante a apresentação
 
 | Categoria | Como apresentar |
-|---|---|
+|-----------|-----------------|
 | Fato do V1 | Característica ou problema documentado do legado |
 | Arquitetura proposta | Direção vigente na documentação, sem afirmar implantação |
 | Decisão arquitetônica | Escolha registrada por DA/ADR e suas consequências |
@@ -56,7 +56,7 @@ A apresentação deve seguir uma narrativa de causa e consequência:
 # 3. Estrutura da apresentação
 
 | Parte | Assunto | Mensagem principal |
-|---|---|---|
+|-------|---------|--------------------|
 | A | Análise arquitetônica do V1 | O acoplamento estrutural ampliava o impacto de mudanças, cargas e falhas |
 | B | Princípios arquitetônicos | Separar responsabilidades e proteger os limites antes de distribuir |
 | C | Arquitetura do V2 | Monólito modular, implantação inicial unificada e integrações por abstrações |
@@ -84,7 +84,7 @@ O mapa DDD completo pode ficar como material de apoio. Na fala principal, uma ta
 ### Sistema base
 
 | Elemento | Situação documentada no V1 |
-|---|---|
+|----------|----------------------------|
 | Aplicação | Aplicação web monolítica e pouco modular |
 | Interface | Páginas ASP clássico |
 | Negócio | Lógica concentrada em biblioteca/DLL C# |
@@ -133,7 +133,7 @@ O mapa DDD completo pode ficar como material de apoio. Na fala principal, uma ta
 ## Parte B — Princípios arquitetônicos aplicados
 
 | Princípio | Aplicação no Prometheus V2 |
-|---|---|
+|-----------|----------------------------|
 | Separation of Concerns — SoC | Separa Users, Courses, Content, Grades, Videos e adaptadores externos |
 | SRP | Cada módulo possui uma razão principal para mudar e controla seu conjunto de regras |
 | Encapsulamento | Grades não altera diretamente Matrículas; usa um contrato para validar o vínculo |
@@ -180,7 +180,7 @@ Banco SQL, módulos, fila e workers não devem ser explicados nesse nível porqu
 O C4 Nível 2 possui um contêiner principal de aplicação: a **aplicação modular inicialmente implantada como uma unidade**. Dentro dela existem módulos e responsabilidades lógicas. Banco SQL, fila, armazenamento e CDN são apresentados por função, sem produto escolhido.
 
 | Módulo lógico | Responsabilidade principal |
-|---|---|
+|---------------|----------------------------|
 | Users | Usuários, perfis, ciclo cadastral, autenticação e autorização |
 | Courses | Cursos, turmas, períodos, calendário e contexto dos vínculos acadêmicos |
 | Content | Metadados, autorização, associação ao curso e ciclo de vida de materiais |
@@ -236,7 +236,7 @@ A requisição permanece ocupada durante a carga pesada e compete com a navegaç
 Estados conceituais:
 
 | Estado | Significado |
-|---|---|
+|--------|-------------|
 | Pendente | Trabalho registrado e aguardando processamento |
 | Em processamento | Um Report Worker assumiu o trabalho |
 | Concluído | PDF armazenado e referência disponível |
@@ -292,7 +292,7 @@ Isolamento de falhas, verificação de saúde, observabilidade, degradação con
 ### Atributos de qualidade
 
 | Atributo | Principal resposta arquitetônica | Limite da afirmação |
-|---|---|---|
+|----------|----------------------------------|---------------------|
 | Segurança | Autenticação, autorização contextual, criptografia e MFA exigido para o Portal de Pais | Provedor, protocolos, sessão e MFA não estão implementados no LMS completo |
 | Desempenho | Object Storage/CDN e relatórios assíncronos | RNF03 e RNF05 ainda exigem cenários completos e teste |
 | Escalabilidade | Modularidade, redução de estado e isolamento de cargas | Escala isolada de Grades não está decidida |
@@ -307,7 +307,7 @@ Isolamento de falhas, verificação de saúde, observabilidade, degradação con
 A classificação DDD é uma **hipótese acadêmica a validar com especialistas da School X**.
 
 | Contexto candidato | Classificação proposta | Justificativa |
-|---|---|---|
+|--------------------|------------------------|---------------|
 | Oferta Acadêmica e Matrículas | Core | Define cursos, turmas, períodos, matrícula e elegibilidade |
 | Avaliações e Resultados Acadêmicos | Core | Concentra avaliações, notas, publicação, histórico e resultados oficiais |
 | Pessoas e Perfis | Supporting | Apoia os fluxos acadêmicos com pessoas, perfis e vínculos |
@@ -361,7 +361,7 @@ Os mesmos termos precisam manter significado consistente em requisitos, arquitet
 A implementação cobre somente Users/Identity e o Portal Web necessário para demonstrá-lo.
 
 | Camada | Implementação existente |
-|---|---|
+|--------|-------------------------|
 | Backend | C#, .NET 8 e ASP.NET Core Web API |
 | Persistência | Entity Framework Core, migrations e SQLite |
 | Segurança | JWT assinado, validação de issuer/audience/expiração, BCrypt e roles |
@@ -403,7 +403,7 @@ O diretório `users-api` representa um limite de código e um contrato HTTP. Ele
 ### Decisões principais para apresentar
 
 | Decisão | Motivo | Consequência principal |
-|---|---|---|
+|---------|--------|------------------------|
 | DA-01 — Modernização incremental | Preservar quinze anos de dados e reduzir risco de substituição total | Convivência e migração ficam mais complexas |
 | DA-02 — Monólito modular | Obter limites sem custo distribuído prematuro | Implantação e escala inicialmente compartilhadas |
 | DA-04 — Binários fora do banco | Reduzir competição entre dados relacionais e arquivos | Exige consistência metadado–objeto e migração dos BLOBs |
@@ -416,7 +416,7 @@ O diretório `users-api` representa um limite de código e um contrato HTTP. Ele
 ### Trade-offs prioritários
 
 | Tensão | Ganho | Custo aceito |
-|---|---|---|
+|--------|-------|--------------|
 | Monólito modular × microsserviços | Simplicidade operacional e migração gradual | Menor independência de implantação e escala |
 | Assincronia × imediatismo | Isolamento, responsividade e resiliência | Resultado posterior e consistência eventual |
 | Object Storage × banco único | Menos carga no banco e melhor distribuição | Consistência entre metadado e arquivo |
@@ -451,404 +451,4 @@ As principais lições são:
 - toda decisão possui benefício, custo e risco;
 - uma prova de conceito deve ser apresentada pelo que comprova, não pelo sistema inteiro.
 
-# 5. Roteiro oral completo
-
-## Abertura
-
-“O Prometheus é o LMS usado pela School X há aproximadamente quinze anos. O sistema acumulou dados muito valiosos, mas também limitações estruturais. Meu objetivo não foi simplesmente trocar tecnologias. Eu analisei onde responsabilidades, dados e processamento estavam acoplados e propus uma evolução que preserva o legado enquanto cria limites claros.”
-
-## Prometheus V1
-
-“O V1 é uma aplicação web monolítica com páginas ASP clássico, lógica concentrada em uma DLL C# e MySQL centralizado. O mesmo banco atende dados relacionais e arquivos binários. A sessão fica no servidor, relatórios PDF são gerados de forma síncrona e as notas são transcritas manualmente ao GRA. Isso faz conteúdos e relatórios competirem com a navegação e torna mudanças mais abrangentes.”
-
-“Meu diagnóstico é que o principal problema não era só tecnologia antiga. Era o acoplamento entre responsabilidades, dados e processamento. Quando uma carga pesada ou uma mudança atingia uma parte, o impacto podia se propagar pelo sistema.”
-
-## Princípios e estilo
-
-“A proposta aplica separação de responsabilidades, SRP, encapsulamento, alta coesão, baixo acoplamento e DIP. Grades, por exemplo, não deve alterar diretamente Matrículas. Ele consulta um contrato do contexto responsável. Integrações como GRA e vídeo também ficam atrás de adaptadores.”
-
-“Escolhi monólito modular porque precisamos modernizar gradualmente e preservar quinze anos de dados. Microsserviços desde o início adicionariam implantação distribuída, observabilidade, consistência e operação antes de termos métricas para justificá-los. Os módulos são lógicos e permanecem inicialmente na mesma unidade de implantação.”
-
-## Arquitetura
-
-“No C4 Nível 1, o Prometheus V2 aparece como um único sistema usado por Administrador, Professor, Estudante e Responsável. Ele se relaciona com GRA, provedor de vídeo e infraestrutura de conteúdo.”
-
-“No Nível 2, existe uma aplicação modular com Users, Courses, Content, Grades e Videos. A base SQL é inicialmente compartilhada, mas cada módulo controla logicamente seus dados. Binários vão para Object Storage; conteúdos apropriados podem ser distribuídos por CDN. Grades Bridge isola o GRA, e Report Workers representam a geração de PDFs em segundo plano.”
-
-## Qualidade
-
-“O melhor exemplo de desempenho é o relatório. No V1, a requisição espera o PDF. No V2, o trabalho é registrado, publicado em fila, processado por um worker, armazenado e consultado depois. Isso responde ao RNF05 de até quinhentos PDFs simultâneos sem degradação significativa da navegação. A arquitetura responde ao requisito, mas ainda precisamos do cenário completo e do teste.”
-
-“Para o GRA, a nota local é confirmada antes da sincronização. Se o sistema externo cair, o trabalho fica pendente, com idempotência, auditoria e reconciliação. Para vídeo, aplicamos degradação controlada: uma falha de transmissão não deve derrubar cursos, conteúdos e notas.”
-
-“A meta de disponibilidade é 99,9%, mas eu não afirmo que ela está garantida. Ainda faltam janela de medição, SLI, topologia, RPO, RTO e evidência operacional. Retry, Circuit Breaker, Bulkhead, Timeout e Fallback foram estudados, mas seus parâmetros e bibliotecas continuam abertos.”
-
-## DDD
-
-“DDD foi aplicado para definir linguagem e limites, não para criar microsserviços. A hipótese classifica Oferta Acadêmica/Matrículas e Avaliações/Resultados como Core. Na apresentação eu uso Grades como exemplo, porque concentra avaliações, notas, publicação e integração oficial. Matrícula, Avaliação, Nota, Publicação e Relatório precisam significar a mesma coisa em requisitos, código e comunicação da equipe.”
-
-## Implementação
-
-“A prova de conceito implementa somente Users/Identity. O backend usa ASP.NET Core, EF Core e SQLite; o frontend usa React e TypeScript. Senhas usam BCrypt, o login emite JWT e o backend autoriza por role. O Admin cria Professor e Aluno, e cada perfil possui rotas e endpoints protegidos.”
-
-“SQLite, JWT e localStorage são escolhas didáticas do recorte, não decisões finais do V2. Courses, Content, Grades, relatórios, GRA e vídeo não estão implementados. Users também não virou microsserviço; o código apenas demonstra um limite lógico e seus contratos.”
-
-## Decisões e encerramento
-
-“As decisões principais foram modernização incremental, monólito modular, binários fora do banco, relatórios assíncronos, Grades Bridge, vídeo externo, redução de estado local e assincronia seletiva. Cada uma resolve um problema e aceita um custo. Por exemplo, assincronia melhora isolamento, mas o resultado deixa de ser imediato e exige estados, idempotência e observabilidade.”
-
-“O aprendizado central foi que arquitetura não é escolher a maior quantidade de tecnologias. É decidir limites, consequências e pontos que ainda não devem ser fechados. O Prometheus V2 cria uma base para evoluir com segurança, sem distribuir o sistema antes de existir evidência.”
-
-# 6. Versão principal — 10 a 12 minutos
-
-| Tempo | Parte | Foco |
-|---:|---|---|
-| 0:00–0:40 | Abertura | Contexto, objetivo e diagnóstico em uma frase |
-| 0:40–2:00 | V1 | Legado, modularidade, desempenho, escala e GRA |
-| 2:00–3:20 | Princípios e estilo | SoC, encapsulamento e por que monólito modular |
-| 3:20–4:15 | C4 Nível 1 | Atores, sistema e dependências externas |
-| 4:15–5:45 | C4 Nível 2 | Módulos, SQL, Object Storage/CDN, GRA e vídeo |
-| 5:45–7:10 | Desempenho e escala | Relatórios assíncronos, RNF05, conteúdo e RNF03 |
-| 7:10–8:25 | Resiliência | GRA, vídeo, RNF01 e padrões estudados |
-| 8:25–9:15 | DDD | Core, supporting, generic e exemplo Grades |
-| 9:15–10:15 | Implementação | Escopo Users/Identity, stack e limites |
-| 10:15–11:15 | Decisões e trade-offs | Quatro compromissos principais e pontos abertos |
-| 11:15–12:00 | Conclusão | Aprendizados e frase final |
-
-Se houver demonstração ao vivo, usar 1–2 minutos depois da implementação e reduzir a explicação de decisões para os quatro itens principais.
-
-# 7. Versão curta — 5 a 7 minutos
-
-## O que agrupar
-
-- unir contexto do V1 e diagnóstico;
-- explicar princípios e estilo em um único bloco;
-- mostrar C4 Nível 1 rapidamente e concentrar a explicação no Nível 2;
-- combinar desempenho, escalabilidade e resiliência;
-- resumir DDD em classificação e um exemplo;
-- fazer demonstração de no máximo um minuto ou usar screenshot;
-- apresentar somente quatro decisões e quatro trade-offs.
-
-## Roteiro curto
-
-### 0:00–0:50 — Problema
-
-“O V1 preserva quinze anos de dados, mas combina ASP clássico, DLL C#, MySQL com BLOBs, sessão local, PDF síncrono e GRA manual. O problema principal é o acoplamento entre responsabilidades, dados e processamento.”
-
-### 0:50–1:35 — Decisão estrutural
-
-“A modernização é incremental e o estilo escolhido é monólito modular. Users, Courses, Content, Grades e Videos são limites lógicos, não microsserviços. Isso reduz complexidade inicial e permite extrair somente quando métricas justificarem.”
-
-### 1:35–2:25 — Arquitetura
-
-“O C4 mostra um único Prometheus conectado a GRA e vídeo. Internamente há uma aplicação modular, SQL compartilhado com propriedade lógica, Object Storage/CDN, Grades Bridge, fila e Report Workers.”
-
-### 2:25–3:35 — Qualidade
-
-“PDF deixa a requisição web e passa por registro, fila, worker, armazenamento e consulta posterior. O GRA não bloqueia a nota local. Vídeo falha de forma isolada. Essas decisões respondem aos RNFs, mas ainda precisam de cenários e medições completas.”
-
-### 3:35–4:15 — DDD
-
-“DDD define linguagem e responsabilidade. Avaliações e Resultados é um Core candidato; Grades controla nota, publicação e relatório. Bounded context não significa microsserviço.”
-
-### 4:15–5:10 — Implementação
-
-“Foi implementado Users/Identity com ASP.NET Core, React, SQLite, JWT, BCrypt e roles. O Admin cadastra Professor e Aluno e o backend recusa acessos incompatíveis. É uma prova de conceito, não o LMS completo.”
-
-### 5:10–6:10 — Trade-offs
-
-“Ganhamos simplicidade com o monólito modular, mas limitamos escala independente. Ganhamos isolamento com assincronia, mas aceitamos resultado posterior. Object Storage reduz carga no banco, mas exige consistência. Provedor externo reduz responsabilidade, mas cria dependência.”
-
-### 6:10–6:40 — Conclusão
-
-“O projeto mostrou que arquitetura é definir limites, consequências e métricas. O V2 não distribui por tendência; ele cria condições para evoluir com segurança.”
-
-# 8. Roteiro da demonstração
-
-## Recomendação
-
-Realizar a demonstração imediatamente depois de explicar a implementação referencial. Duração máxima: **1–2 minutos**.
-
-## Preparação
-
-- backend em `http://localhost:5000`;
-- frontend em `http://localhost:5173`;
-- Admin local: `admin@prometheus.local`;
-- senha acadêmica: `Admin@123`;
-- deixar uma aba com Portal Web e outra com Swagger;
-- criar antecipadamente um plano B com duas capturas de tela.
-
-## Fluxo recomendado
-
-1. Acessar o login como Admin.
-2. Explicar que a API verifica o hash BCrypt e emite JWT com role.
-3. Mostrar a listagem administrativa.
-4. Cadastrar rapidamente um Professor ou Aluno.
-5. Encerrar a sessão e autenticar com o perfil criado.
-6. Tentar acessar `/admin` e mostrar o redirecionamento por perfil.
-7. Se houver tempo, usar Swagger com token de Professor e chamar `GET /api/demo/admin` para demonstrar o `403 Forbidden` real do backend.
-
-## O que dizer durante a demo
-
-“A proteção de rota melhora a experiência, mas não é a segurança efetiva. O backend valida o token e a role. O frontend pode esconder uma função; somente a API pode negar a operação.”
-
-## O que evitar
-
-- não explicar CSS ou detalhes visuais;
-- não criar muitos usuários;
-- não navegar por todos os endpoints;
-- não tentar corrigir ambiente durante a apresentação;
-- se a demo falhar, usar screenshots e continuar a narrativa.
-
-# 9. Perguntas prováveis
-
-1. Por que escolher monólito modular em vez de microsserviços?
-2. Por que Grades não foi criado como serviço independente?
-3. Como o sistema garante 99,9% de disponibilidade?
-4. Por que retirar os arquivos do banco?
-5. O que acontece se o GRA ficar indisponível?
-6. Como funciona a consistência eventual nessa integração?
-7. Por que JWT foi usado?
-8. Por que SQLite foi usado na implementação?
-9. Guardar JWT em localStorage é seguro?
-10. Como Grades poderia escalar no futuro?
-11. Qual é o Core Domain?
-12. Qual é a diferença entre módulo lógico e bounded context?
-13. Onde o DIP foi aplicado?
-14. Qual é o principal trade-off da proposta?
-15. O que não foi implementado?
-16. Como evitar que o monólito modular volte a ficar acoplado?
-17. Como seria feita a migração dos dados do V1?
-18. Que métricas justificariam extrair Grades?
-19. Por que não selecionar RabbitMQ ou Redis agora?
-20. Qual é o maior risco da arquitetura?
-
-# 10. Respostas
-
-## 1. Por que monólito modular e não microsserviços?
-
-Porque a modernização precisa preservar dados e avançar gradualmente. O monólito modular cria limites com menor complexidade operacional. Serviços independentes só seriam considerados quando métricas mostrarem benefício superior ao custo da distribuição.
-
-## 2. Por que Grades não virou serviço independente?
-
-Grades é um forte candidato a evolução, mas persistência, consistência com matrícula, auditoria, GRA, migração e operação ainda precisam ser definidos. Separá-lo agora seria uma decisão prematura sem métricas.
-
-## 3. Como garante 99,9%?
-
-A arquitetura não afirma que já garante. RNF01 define a meta, mas ainda faltam janela, SLI, exclusões, topologia, RPO/RTO e evidência operacional. Isolamento, observabilidade e redundância são respostas necessárias, não prova do resultado.
-
-## 4. Por que Object Storage?
-
-Porque BLOBs no banco fazem a persistência transacional também transferir arquivos grandes. Object Storage separa essa responsabilidade e a CDN pode apoiar a entrega externa. O custo é manter autorização e consistência entre metadado e objeto.
-
-## 5. O que acontece se o GRA cair?
-
-A nota validada é registrada localmente e confirmada ao professor. A sincronização fica pendente e deve ser retomada com idempotência, tentativas controladas, auditoria e reconciliação.
-
-## 6. Como funciona a consistência eventual?
-
-Prometheus e GRA podem ficar temporariamente em estados diferentes depois da confirmação local. O sistema rastreia a sincronização e reconcilia posteriormente. Fonte de autoridade e conflitos ainda são decisões abertas.
-
-## 7. Por que JWT?
-
-JWT foi escolhido na implementação referencial para demonstrar autenticação stateless e roles de forma simples. Ele não representa a seleção final de identidade do V2 e não resolve segurança sozinho.
-
-## 8. Por que SQLite?
-
-SQLite reduz dependências e facilita executar a prova de conceito localmente. O SGBD definitivo do V2 continua aberto; SQLite não é apresentado como escolha de produção.
-
-## 9. JWT em localStorage é seguro?
-
-É uma simplificação didática e aumenta o impacto de XSS. Uma solução real deve avaliar cookies HttpOnly, Secure e SameSite, CSRF, revogação e estratégia completa de sessão.
-
-## 10. Como Grades escalaria no futuro?
-
-Primeiro seriam medidos throughput, latência, backlog, CPU, memória, conexões SQL e impacto na navegação. Só depois seriam avaliados mais workers, múltiplas instâncias, persistência especializada ou extração.
-
-## 11. Qual é o Core Domain?
-
-A hipótese DDD identifica Oferta Acadêmica/Matrículas e Avaliações/Resultados como Core. Para explicar o projeto, uso Grades como exemplo central porque concentra regras críticas de avaliação, nota, publicação e integração oficial. A classificação ainda precisa ser validada com a School X.
-
-## 12. Módulo e bounded context são iguais?
-
-Não necessariamente. Bounded context é um limite de modelo e linguagem do domínio; módulo é uma forma de organizar responsabilidade no software. Eles podem se alinhar, mas nenhum deles implica microsserviço.
-
-## 13. Onde o DIP foi aplicado?
-
-GRA, Video Provider e armazenamento são acessados por abstrações ou adaptadores. Grades Bridge impede que o contrato externo do GRA domine o modelo interno de Grades.
-
-## 14. Qual é o principal trade-off?
-
-O monólito modular reduz complexidade operacional e favorece migração, mas limita implantação e escala independente. Ele exige governança para não reproduzir o acoplamento do legado.
-
-## 15. O que não foi implementado?
-
-Courses, Content, Grades, relatórios, GRA, vídeo, Portal de Pais, MFA, Object Storage, CDN e infraestrutura de produção. A implementação cobre somente Users/Identity e o Portal Web correspondente.
-
-## 16. Como evitar acoplamento no monólito?
-
-Com propriedade lógica, contratos explícitos, revisão de dependências, testes de arquitetura e proibição de acesso direto às estruturas internas de outro módulo. A disciplina é parte do custo da decisão.
-
-## 17. Como migrar os dados do V1?
-
-Em lotes incrementais, com inventário, cópias recuperáveis, mapeamento de identificadores, validação de contagens e relações e caminho de retorno. BLOBs só seriam removidos depois de copiar, verificar integridade, registrar referência e testar autorização.
-
-## 18. Qual métrica justificaria extrair Grades?
-
-Saturação persistente atribuída a Grades, backlog e idade da fila, throughput, percentis de latência, taxa de erro, conexões SQL e necessidade de ritmo de mudança ou disponibilidade própria. A decisão precisa comparar o benefício ao custo operacional.
-
-## 19. Por que não RabbitMQ ou Redis agora?
-
-Porque a arquitetura exige comportamento de fila e pode futuramente exigir cache, mas ainda não definiu garantias, volume, TTL, invalidação e operação. Escolher produto antes desses critérios seria prematuro.
-
-## 20. Qual é o maior risco?
-
-A perda ou corrupção do acervo histórico é um risco muito alto. Outro risco estrutural é reproduzir o acoplamento do V1 dentro do novo monólito. Migração incremental, validação e governança dos limites tratam esses riscos.
-
-# 11. Coisas que NÃO devo falar
-
-| Não falar | Por que está errado |
-|---|---|
-| “Users é um microsserviço.” | É um módulo lógico; o diretório e a API não comprovam implantação independente |
-| “Estamos usando Redis.” | Cache e produto continuam condicionados |
-| “Usamos RabbitMQ.” | A fila é uma abstração; o broker não foi selecionado |
-| “Grades já escala horizontalmente sozinho.” | Escala isolada é evolução condicionada |
-| “O sistema garante 99,9% porque tem Load Balancer.” | Load Balancer não foi escolhido e disponibilidade exige medição, redundância e operação |
-| “JWT torna o sistema seguro.” | JWT é apenas um mecanismo; segurança inclui sessão, autorização, chaves, XSS, CSRF e operação |
-| “CDN resolve toda a disponibilidade.” | CDN ajuda conteúdo; não resolve banco, aplicação, integrações ou recuperação |
-| “NoSQL é melhor para Grades.” | Não há decisão ou evidência que justifique persistência especializada |
-| “O Prometheus V2 está implementado.” | Somente Users/Identity possui implementação referencial |
-| “O backend de autenticação representa a arquitetura completa.” | Ele prova apenas um recorte |
-| “C4 Nível 2 mostra cinco microsserviços.” | O desenho vigente mostra uma aplicação modular unificada |
-| “O RNF05 já foi comprovado.” | A arquitetura responde ao requisito, mas o teste completo ainda não existe |
-| “Retry e Circuit Breaker já estão configurados.” | Foram estudados; composição e parâmetros continuam abertos |
-| “SQLite é o banco definitivo.” | É escolha local da prova de conceito |
-| “Bounded context sempre vira serviço.” | Modelagem de domínio e topologia de implantação são decisões diferentes |
-
-# 12. Glossário
-
-| Termo | Definição curta |
-|---|---|
-| SoC | Separação de responsabilidades por preocupação |
-| SRP | Um componente possui uma razão principal para mudar |
-| DIP | Depender de abstrações, não de detalhes externos concretos |
-| DRY | Evitar duplicação de conhecimento e regras |
-| Coesão | Grau em que responsabilidades relacionadas ficam juntas |
-| Acoplamento | Grau de dependência entre partes do sistema |
-| Bounded Context | Limite no qual modelo e linguagem possuem significado consistente |
-| Core Domain | Capacidade estratégica que diferencia o negócio |
-| Supporting Domain | Capacidade importante que apoia o Core |
-| Generic Subdomain | Capacidade comum que pode usar solução padronizada |
-| JWT | Token assinado com claims usado para autenticação/autorização |
-| Idempotência | Repetir a operação produz o mesmo efeito observável |
-| Consistência eventual | Sistemas convergem depois de um intervalo |
-| Fallback | Resposta alternativa quando a principal falha |
-| Retry | Nova tentativa controlada de uma operação |
-| Circuit Breaker | Interrompe chamadas a uma dependência que está falhando |
-| Bulkhead | Isola recursos para limitar propagação de falhas |
-| Horizontal Scaling | Aumentar a quantidade de instâncias ou executores |
-| Vertical Scaling | Aumentar recursos de uma instância |
-| CDN | Rede que distribui conteúdo próximo ao consumidor |
-| Object Storage | Armazenamento de objetos/binários por chave e metadados |
-| C4 | Modelo de diagramas de contexto, contêineres, componentes e código |
-| ADR | Registro de contexto, decisão, alternativas e consequências |
-| RPO | Perda máxima de dados aceitável em tempo |
-| RTO | Tempo máximo aceitável para recuperação |
-
-# 13. Conclusões pessoais
-
-## O que aprendi
-
-“Eu aprendi que arquitetura não é escolher tecnologia ou dividir o sistema na maior quantidade possível de serviços. Primeiro é necessário entender o problema, os atributos de qualidade, os limites do domínio e as consequências de cada decisão.”
-
-“Também aprendi que modularidade não surge apenas com pastas ou APIs. Ela depende de propriedade de regras, contratos explícitos, alta coesão e controle das dependências. A assincronia pode melhorar desempenho e resiliência, mas adiciona estados, idempotência, reconciliação e necessidade de observabilidade.”
-
-## O que mudou na minha visão
-
-“Antes eu associava escalabilidade principalmente a microsserviços e infraestrutura. Agora entendo que reduzir estado local, retirar arquivos do banco, isolar cargas e medir gargalos pode ser mais importante do que distribuir prematuramente. Microsserviço é uma consequência possível de uma necessidade comprovada, não um objetivo por si só.”
-
-## O que eu faria diferente
-
-- coletaria métricas reais do V1 mais cedo;
-- definiria cenários completos de RNF com ambiente, percentis e critérios de aceitação;
-- validaria a classificação DDD com especialistas do negócio;
-- definiria contratos do GRA e do Video Provider mais cedo;
-- testaria hipóteses de relatórios e conteúdo com protótipos;
-- fecharia RPO/RTO antes de escolher topologia de alta disponibilidade;
-- criaria critérios automatizados para governar dependências entre módulos.
-
-# 14. Frase final
-
-> **O Prometheus V2 não foi desenhado para distribuir o sistema por tendência, mas para criar limites claros, preservar o legado e permitir que cada evolução futura seja decidida com segurança e evidência.**
-
-# COLA PARA APRESENTAÇÃO
-
-## Problema V1
-
-- ASP clássico + DLL C# + MySQL centralizado.
-- BLOBs no banco, sessão local, PDFs síncronos e GRA manual.
-- Alto acoplamento, baixa coesão e competição por recursos.
-- Diagnóstico: responsabilidades, dados e processamento estavam acoplados.
-
-## Solução V2
-
-- Modernização incremental.
-- Monólito modular inicialmente implantado como uma unidade.
-- Módulo lógico ≠ API ≠ bounded context ≠ microsserviço.
-- Extração futura somente com métricas.
-
-## Módulos
-
-- Users: usuários, perfis e identidade.
-- Courses: cursos, turmas, períodos e matrículas.
-- Content: metadados e materiais.
-- Grades: avaliações, notas, publicação e relatórios.
-- Videos: contexto acadêmico das sessões.
-
-## Três RNFs principais
-
-- RNF01: 99,9% de disponibilidade; medição ainda precisa ser completada.
-- RNF03: conteúdo externo em menos de 2 segundos; cenário incompleto.
-- RNF05: até 500 PDFs simultâneos sem degradação significativa; teste pendente.
-
-RNF04: GRA não bloqueia o registro local da nota.
-
-## Quatro decisões
-
-1. Monólito modular para reduzir complexidade distribuída.
-2. Binários fora do banco com Object Storage/CDN.
-3. Relatórios assíncronos por fila e Report Workers.
-4. Grades Bridge e sincronização assíncrona com o GRA.
-
-## Quatro trade-offs
-
-1. Simplicidade operacional × menor escala independente.
-2. Assincronia e isolamento × resultado posterior.
-3. Object Storage × consistência metadado–arquivo.
-4. Provedor externo × dependência de contrato e disponibilidade.
-
-## DDD
-
-- Core candidatos: Oferta Acadêmica/Matrículas e Avaliações/Resultados.
-- Exemplo principal: Grades.
-- Supporting: Pessoas/Perfis, Content, Comunicação e Sessões ao Vivo.
-- Generic: Identidade/Acesso e Entrega de Notificações.
-- Bounded context não implica microsserviço.
-
-## Implementação
-
-- Somente Users/Identity.
-- ASP.NET Core + React/TypeScript + SQLite.
-- JWT + BCrypt + roles Admin/Professor/Aluno.
-- Admin cadastra usuários; rotas e endpoints protegidos.
-- Não representa o LMS completo.
-
-## Pontos abertos
-
-- SGBD, broker, cache, identidade, vídeo e observabilidade.
-- Alta disponibilidade, RPO/RTO e persistência futura de Grades.
-- Retry/Circuit Breaker/Bulkhead estudados, não configurados como decisão.
-
-## Fechamento
-
-> Limites claros primeiro; distribuição e tecnologia somente quando requisitos e métricas justificarem.
+# 

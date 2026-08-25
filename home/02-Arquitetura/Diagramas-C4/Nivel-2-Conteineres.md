@@ -1,18 +1,18 @@
 # Nível 2 — Contêineres
 
-> **Estado documental:** visão conceitual vigente na documentação arquitetural, revisada em 19 de agosto de 2026. O diagrama não comprova implementação nem seleciona produto ou fornecedor.
+> **Estado documental:** visão conceitual vigente na documentação arquitetural, revisada em 25 de agosto de 2026. O diagrama não comprova implementação nem seleciona produto ou fornecedor.
 
 ## Escopo e regra de leitura
 
 O Prometheus V2 é delimitado como um sistema. Sua implantação inicial contém uma **aplicação modular implantada como uma unidade**. Users, Courses, Content, Grades e Videos são responsabilidades lógicas internas, não cinco contêineres, processos ou microsserviços.
 
-Grades Bridge e Report Workers também aparecem como responsabilidades dentro da aplicação. As demais caixas representam persistência, capacidades de infraestrutura ou sistemas externos. As setas entre o portal e os módulos representam contratos lógicos; não comprovam comunicação de rede.
+Grades Bridge e Report Workers também aparecem como responsabilidades dentro da aplicação. As demais caixas representam persistência, capacidades de infraestrutura ou sistemas externos. A relação do usuário com a aplicação representa o acesso pelo Portal Web e por seus contratos; os módulos internos aparecem na nota explicativa e não como chamadas de rede ou contêineres próprios.
 
 ## Diagrama
 
-![image](uploads/1d5a1c663088ffec0058b156f1c9795a/image.png){width=900 height=416}
+![C4 Nível 2 — contêineres do Prometheus V2](uploads/1d5a1c663088ffec0058b156f1c9795a/image.png){width=900 height=416}
 
-A [fonte editável equivalente em PlantUML](/home/02-Arquitetura/Diagramas-C4/Fonte-PlantUML-Nivel-2-Conteineres) representa os contêineres sem transformar módulos, Grades Bridge ou Report Workers em contêineres próprios. A versão deve ser renderizada e revisada antes de substituir o diagrama exibido acima.
+O diagrama exibido acima é uma renderização da [fonte editável equivalente em PlantUML](/home/02-Arquitetura/Diagramas-C4/Fonte-PlantUML-Nivel-2-Conteineres). Ambos representam os contêineres sem transformar módulos, Grades Bridge ou Report Workers em contêineres próprios.
 
 ## Legenda e limites
 

@@ -37,7 +37,7 @@ Da mesma forma, identificar um subdomínio ou propor um contexto delimitado não
 
 Esses limites buscam alta coesão, baixo acoplamento e encapsulamento. Cada módulo deve controlar suas regras e oferecer contratos aos consumidores, evitando acesso direto às estruturas internas de outro domínio.
 
-![image](uploads/b6d0beca1718c25f4c4c2a4a8d3d3478/image.png){width=900 height=438}
+![Módulos e responsabilidades lógicas do Prometheus V2](uploads/b6d0beca1718c25f4c4c2a4a8d3d3478/image.png){width=900 height=438}
 
 Uma visão editável desses limites está na [fonte PlantUML de Módulos e Responsabilidades](/home/02-Arquitetura/Fonte-PlantUML-Modulos-e-Responsabilidades). As setas do desenho representam colaborações lógicas, não chamadas de rede obrigatórias.
 
@@ -65,7 +65,7 @@ Os limites finais de Comunicação e Notificações ainda não estão definidos.
 
 ## Hipótese de modelagem estratégica com DDD
 
-> **Proposta condicionada:** a classificação e os contextos desta seção resultam das análises acadêmicas da Semana 7. Eles precisam ser validados com especialistas da School X, não substituem Users, Courses, Content, Grades e Videos e não comprovam implementação.
+> **Proposta condicionada:** a classificação e os contextos desta seção resultam da análise de modelagem estratégica disponível. Eles precisam ser validados com especialistas da School X, não substituem Users, Courses, Content, Grades e Videos e não comprovam implementação.
 
 A hipótese distingue capacidades presumidamente diferenciadoras, capacidades de apoio e capacidades genéricas. Criticidade técnica, sozinha, não torna um subdomínio *core*.
 
@@ -88,7 +88,7 @@ Nessa leitura proposta:
 - compartilhar fisicamente o banco SQL não constitui *Shared Kernel*: não há decisão de compartilhar deliberadamente um único modelo de domínio entre contextos;
 - relações *upstream/downstream*, linguagens publicadas, eventos e responsabilidades de equipe ainda precisam de descoberta e não são contratos vigentes por simples aparição no mapa.
 
-![image](uploads/0fb6e0c58759cd8265ff8d0b47b8e265/image.png){width=900 height=580}
+![Mapa de contextos DDD proposto para o Prometheus V2](uploads/0fb6e0c58759cd8265ff8d0b47b8e265/image.png){width=900 height=580}
 
 O [mapa de contextos DDD proposto em PlantUML](/home/02-Arquitetura/Fonte-PlantUML-Mapa-de-Contextos-DDD-Proposto) visualiza essa hipótese dentro da implantação inicialmente unificada. Ele é complementar e não substitui os diagramas C4 vigentes.
 

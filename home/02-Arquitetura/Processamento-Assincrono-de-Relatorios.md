@@ -26,7 +26,7 @@ Esse fluxo não define endpoint, código HTTP, formato de mensagem, produto de f
 
 O diagrama abaixo é uma representação conceitual do fluxo. Fila, Report Workers e armazenamento são responsabilidades ou abstrações arquiteturais; o desenho não seleciona produto nem define unidades independentes de implantação.
 
-![image](uploads/f0ef047b4517b42f2fe8e5f72a3dabd7/image.png){width=825 height=600}
+![Sequência do processamento assíncrono de relatórios](uploads/f0ef047b4517b42f2fe8e5f72a3dabd7/image.png){width=825 height=600}
 
 A [fonte editável equivalente em PlantUML](/home/02-Arquitetura/Fonte-PlantUML-Processamento-Assincrono-de-Relatorios) detalha a sequência, os estados e a falha controlada sem selecionar broker, padrão auxiliar ou topologia independente.
 

@@ -28,10 +28,11 @@ Esta Home funciona apenas como índice. O conteúdo acadêmico está organizado 
 5. [Apresentações](/home/05-Apresentacoes)
    - [Apresentação Parcial 1](/home/05-Apresentacoes/Apresentacao-Parcial-1)
    - [Apresentação Final](/home/05-Apresentacoes/Apresentacao-Final)
+6. [Referências](/home/06-Referencias)
 7. [Implementação Referencial](/home/07-Implementacao-Referencial)
 
 ## Estado atual
 
 A Wiki consolida a arquitetura proposta e vigente na documentação; não comprova implementação ou implantação do V2. As fontes canônicas prevalecem sobre recortes temporais preservados nas apresentações. Tecnologias, fornecedores e topologias não decididos permanecem explicitamente abertos ou condicionados.
 
-A numeração segue os entregáveis identificados no material do Capstone. Não foi confirmado um entregável público `06`; por isso, o índice preserva o salto de `05` para `07` sem preencher a lacuna por conveniência.
+A numeração segue os entregáveis identificados no material do Capstone. O item `06` consolida as referências acadêmicas, bibliográficas, técnicas e internas utilizadas no projeto.
